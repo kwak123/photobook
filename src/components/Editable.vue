@@ -8,6 +8,7 @@ Based on https://codelike.pro/create-a-contenteditable-with-vue/
     contenteditable="true"
     :data-text="empty"
     @input="$emit('update:content', $event.target.innerText)"
+    @keydown="onKeyDown"
     @blur="onEditComplete"></div>
 </template>
 
@@ -27,6 +28,13 @@ export default {
   methods: {
     onEditComplete() {
       this.handleEditComplete(this.contentType, this.$el.innerText);
+    },
+    onKeyDown(e) {
+      if (e.keyCode === 13) {
+        e.preventDefault();
+        this.$el.blur();
+        this.handleEditComplete();
+      }
     },
   },
   computed: {

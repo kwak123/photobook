@@ -2,7 +2,7 @@
   <div class="rating__container">
     <span
       v-for="n in 5"
-      class="rating"
+      class="rating__container--star"
       :class="{ checked: rating + n > 5}"
       :key="n"
       @click="handleRatingSelected(6 - n)">
@@ -42,23 +42,23 @@ export default {
   flex-direction: row-reverse;
 }
 
-.rating__container > span {
+.rating__container--star {
   margin: 0 2px;
   cursor: pointer;
   font-size: 20px;
 }
 
-.rating__container > span:hover,
-.rating__container > span:hover ~ span {
+.rating__container--star:hover,
+.rating__container--star:hover ~ span {
   color: #63947c;
 }
 
-.rating__ocntainer > span:active {
-  filter: brightness(0.6);
+.rating__container--star:active,
+.rating__container--star:active ~ span {
+  filter: brightness(0.9);
 }
 
 .rating.checked {
-  content: '★';
   color: darkslategrey;
 }
 </style>

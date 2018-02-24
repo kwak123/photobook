@@ -52,8 +52,10 @@ export default {
     };
   },
   mounted() {
-    this.photoList = sampleData;
-    this.user = sampleUser;
+    setTimeout(() => {
+      this.user = sampleUser;
+      this.photoList = sampleData;
+    }, 500);
   },
 };
 </script>

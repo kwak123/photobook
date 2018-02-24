@@ -49,5 +49,6 @@ export default {
 
 .profile__selected {
   width: 70vw;
+  overflow-y: scroll;
 }
 </style>
