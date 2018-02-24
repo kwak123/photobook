@@ -1,22 +1,15 @@
 <template>
   <div class="">
-    <p>{{ username }}</p>
-    <p>{{ first }}</p>
-    <p>{{ last }}</p>
+    <p>{{ user.username }}</p>
+    <p>{{ user.first }}</p>
+    <p>{{ user.last }}</p>
+    <p>{{ user.average }}</p>
   </div>
 </template>
 
 <script>
 export default {
   name: 'UserInfo',
-  data() {
-    return {
-      username: 'TestAccount',
-      imageUrL: '',
-      first: 'Default',
-      last: 'User',
-      rating: 3.8,
-    };
-  },
+  props: ['user'],
 };
 </script>

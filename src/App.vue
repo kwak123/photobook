@@ -1,25 +1,44 @@
+<!--
+
+Entry point into the Vue App
+
+Notes:
+* I am aware that passing callbacks through propchains is a little bit non-Vue-y but
+it's much more DRY here
+
+-->
+
 <template>
   <div id="app">
-    <UserInfo />
-    <PhotoList v-bind:photo-list="photoList"/>
+    <Profile
+      v-bind="{ photoList, photo, user, handlePhotoSelected }"/>
   </div>
 </template>
 
 <script>
-import UserInfo from './components/UserInfo';
-import PhotoList from './components/PhotoList';
+import Profile from './components/Profile';
 
 import sampleData from '../sample.json';
 
 export default {
   name: 'App',
   components: {
-    UserInfo,
-    PhotoList,
+    Profile,
   },
   data() {
     return {
       photoList: sampleData,
+      photo: {},
+      user: {
+        username: 'TestAccount',
+        imageUrl: '',
+        first: 'Default',
+        last: 'User',
+        average: '4.0',
+      },
+      handlePhotoSelected: (idx) => {
+        this.photo = this.photoList[idx];
+      },
     };
   },
 };
