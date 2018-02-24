@@ -7,7 +7,7 @@
       <div
         class="photolist__inner--grid-item"
         v-for="(photo, idx) in photoList"
-        v-on:click="onPhotoSelected(idx)"
+        v-on:click="setSelectedPhoto({ idx })"
         :key="idx">
         <img
           class="photolist__inner--thumbnail"
@@ -20,17 +20,14 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex';
+
 import Loading from './Loading';
 
 export default {
   name: 'PhotoList',
-  props: ['handlePhotoSelected'],
   components: { Loading },
-  methods: {
-    onPhotoSelected(idx) {
-      this.handlePhotoSelected(idx);
-    },
-  },
+  methods: mapMutations(['setSelectedPhoto']),
   computed: {
     photoList() {
       return this.$store.state.photos.photoList;

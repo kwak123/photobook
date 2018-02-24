@@ -3,12 +3,10 @@
     <div class="profile__side-panel">
       <h1>Photobook</h1>
       <UserInfo />
-      <PhotoList
-        v-bind="{ handlePhotoSelected }"/>
+      <PhotoList />
     </div>
     <div class="profile__selected">
-      <PhotoDetail
-        v-bind="{ photo, handleEditComplete, handleRatingSelected }"/>
+      <PhotoDetail />
     </div>
   </div>
 </template>
@@ -25,7 +23,6 @@ export default {
     PhotoList,
     PhotoDetail,
   },
-  props: ['photo', 'handlePhotoSelected', 'handleEditComplete', 'handleRatingSelected'],
 };
 </script>
 

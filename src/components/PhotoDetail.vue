@@ -2,20 +2,20 @@
   <div class="photodetail__container">
     <div
       class="photodetail__inner"
-      v-if="photo.url">
+      v-if="url">
       <Editable
         class="photodetail__inner--title"
-        :content="photo.title"
+        :content="title"
         :handleEditComplete="handleEditComplete"
         content-type="title" />
-      <img class="photodetail__inner--photo" v-bind:src="photo.url" alt="photo.url"/>
+      <img class="photodetail__inner--photo" v-bind:src="url" alt="photo.url"/>
       <Rating
         class="photodetail__inner--rating"
-        :rating="photo.rating"
+        :rating="rating"
         :handleRatingSelected="handleRatingSelected"/>
       <Editable
         class="photodetail__inner--description"
-        :content="photo.description"
+        :content="description"
         :handleEditComplete="handleEditComplete"
         content-type="description"/>
     </div>
@@ -29,6 +29,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 import Editable from './Editable';
 import Rating from './Rating';
 
@@ -38,7 +40,15 @@ export default {
     Editable,
     Rating,
   },
-  props: ['photo', 'handleEditComplete', 'handleRatingSelected'],
+  props: ['handleEditComplete', 'handleRatingSelected'],
+  computed: {
+    ...mapState({
+      url: state => state.photos.selectedPhoto.url,
+      title: state => state.photos.selectedPhoto.title,
+      rating: state => state.photos.selectedPhoto.rating,
+      description: state => state.photos.selectedPhoto.description,
+    }),
+  },
 };
 </script>
 

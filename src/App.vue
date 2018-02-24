@@ -10,9 +10,7 @@ it's much more DRY here
 
 <template>
   <div id="app">
-    <Profile
-      v-bind="{ photo, handlePhotoSelected, handleEditComplete,
-        handleRatingSelected }"/>
+    <Profile />
   </div>
 </template>
 
@@ -25,22 +23,6 @@ export default {
   store,
   components: {
     Profile,
-  },
-  data() {
-    return {
-      photo: {},
-      handlePhotoSelected: (idx) => {
-        if (this.photo !== this.photoList[idx]) {
-          this.photo = this.photoList[idx];
-        }
-      },
-      handleEditComplete: (type, content) => {
-        this.photo[type] = content;
-      },
-      handleRatingSelected: (rating) => {
-        this.photo.rating = rating;
-      },
-    };
   },
   mounted() {
     this.$store.dispatch('fetchUser');
