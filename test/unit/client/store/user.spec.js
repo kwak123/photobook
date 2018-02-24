@@ -16,6 +16,20 @@ describe('userModule', () => {
     });
   });
 
+  describe('actions', () => {
+    const { actions } = user;
+
+    const commit = (type, payload) => {
+      expect(type).toEqual('setUser');
+      expect(payload).toBeTruthy();
+    };
+
+    describe('fetchUser', () => {
+      const { fetchUser } = actions;
+      it('should be able to fetch a user and commit mutation', () => fetchUser({ commit }));
+    });
+  });
+
   describe('mutations', () => {
     const { mutations } = user;
 

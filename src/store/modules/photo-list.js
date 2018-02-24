@@ -6,9 +6,8 @@ const state = {
 
 const actions = {
   fetchPhotos({ commit }) {
-    photobookApi.fetchPhotos()
-      .then(photoList => commit('setPhotoList', photoList))
-      .catch(error => console.log(error));
+    return photobookApi.fetchPhotos()
+      .then(photoList => commit('setPhotoList', photoList));
   },
 };
 

@@ -12,7 +12,7 @@ describe('photoListStore', () => {
   describe('actions', () => {
     const { actions } = photoListStore;
 
-    const mockCommit = (type, payload) => {
+    const commit = (type, payload) => {
       expect(type).toEqual('setPhotoList');
       expect(payload).toBeTruthy();
     };
@@ -20,7 +20,7 @@ describe('photoListStore', () => {
     describe('fetchPhotos', () => {
       const { fetchPhotos } = actions;
 
-      it('should be able to fetch photos', () => fetchPhotos({ mockCommit }));
+      it('should be able to fetch photos', () => fetchPhotos({ commit }));
     });
   });
 

@@ -1,9 +1,18 @@
+import photobookApi from '../../api/photobook';
+
 const state = {
   avatar: '',
   username: '',
   first: '',
   last: '',
   rating: '',
+};
+
+const actions = {
+  fetchUser({ commit }) {
+    return photobookApi.fetchUser()
+      .then(user => commit('setUser', user));
+  },
 };
 
 const mutations = {
@@ -17,5 +26,6 @@ const mutations = {
 
 export default {
   state,
+  actions,
   mutations,
 };
