@@ -11,7 +11,8 @@ it's much more DRY here
 <template>
   <div id="app">
     <Profile
-      v-bind="{ photoList, photo, user, handlePhotoSelected, handleEditComplete }"/>
+      v-bind="{ photoList, photo, user, handlePhotoSelected, handleEditComplete,
+        handleRatingSelected }"/>
   </div>
 </template>
 
@@ -19,6 +20,7 @@ it's much more DRY here
 import Profile from './components/Profile';
 
 import sampleData from '../sample.json';
+import sampleUser from '../sample-user.json';
 
 export default {
   name: 'App',
@@ -27,7 +29,7 @@ export default {
   },
   data() {
     return {
-      photoList: sampleData,
+      photoList: [],
       photo: {},
       user: {
         username: 'TestAccount',
@@ -44,14 +46,28 @@ export default {
       handleEditComplete: (type, content) => {
         this.photo[type] = content;
       },
+      handleRatingSelected: (rating) => {
+        this.photo.rating = rating;
+      },
     };
+  },
+  mounted() {
+    this.photoList = sampleData;
+    this.user = sampleUser;
   },
 };
 </script>
 
 <style>
 html {
+  height: 100vh;
+  width: 100vw;
   box-sizing: border-box;
+}
+
+body {
+  height: 100%;
+  width: 100%;
 }
 
 *, *:before, *:after {

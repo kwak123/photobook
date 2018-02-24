@@ -8,10 +8,11 @@
         :content="photo.title"
         :handleEditComplete="handleEditComplete"
         content-type="title" />
-      <img class="inner__photo" v-bind:src="photo.url" alt="photo.url"/>
-      <p class="inner__rating">
-        {{ photo.rating }}
-      </p>
+      <img class="photodetail__inner--photo" v-bind:src="photo.url" alt="photo.url"/>
+      <Rating
+        class="photodetail__inner--rating"
+        :rating="photo.rating"
+        :handleRatingSelected="handleRatingSelected"/>
       <Editable
         class="photodetail__inner--description"
         :content="photo.description"
@@ -19,25 +20,34 @@
         content-type="description"/>
     </div>
 
-    <div v-else>
-      <p>Select a photo below</p>
+    <div
+      class="photodetail__empty"
+      v-else>
+      <p>Select a photo</p>
     </div>
   </div>
 </template>
 
 <script>
 import Editable from './Editable';
+import Rating from './Rating';
 
 export default {
   name: 'PhotoDetail',
   components: {
     Editable,
+    Rating,
   },
-  props: ['photo', 'handleEditComplete'],
+  props: ['photo', 'handleEditComplete', 'handleRatingSelected'],
 };
 </script>
 
 <style scoped>
+.photodetail__container {
+  padding: 32px 0;
+  height: 100vh;
+}
+
 .photodetail__inner {
   display: flex;
   flex-direction: column;
@@ -52,10 +62,22 @@ export default {
   border-bottom: lightgrey 1px solid;
 }
 
-.inner__photo {
+.photodetail__inner--rating {
+  margin: 16px 0;
+}
+
+.photodetail__inner--photo {
   width: 640px;
   height: 400px;
   object-fit: cover;
+}
+
+.photodetail__empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
 }
 </style>
 

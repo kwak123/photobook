@@ -28,11 +28,7 @@ export default {
 };
 </script>
 
-<style scoped>
-.container {
-  display: initial;
-}
-
+<style>
 .inner {
   display: grid;
   grid-template-columns: repeat(4, 64px);

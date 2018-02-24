@@ -7,7 +7,8 @@
         v-bind="{ photoList, handlePhotoSelected }"/>
     </div>
     <div class="profile__selected">
-      <PhotoDetail v-bind="{ photo, handleEditComplete}"/>
+      <PhotoDetail
+        v-bind="{ photo, handleEditComplete, handleRatingSelected }"/>
     </div>
   </div>
 </template>
@@ -24,7 +25,8 @@ export default {
     PhotoList,
     PhotoDetail,
   },
-  props: ['photoList', 'photo', 'user', 'handlePhotoSelected', 'handleEditComplete'],
+  props: ['photoList', 'photo', 'user', 'handlePhotoSelected', 'handleEditComplete',
+    'handleRatingSelected'],
 };
 </script>
 
@@ -41,10 +43,11 @@ export default {
   width: 30vw;
   background-color: #f9f9f9;
   border-right: 1px lightgrey solid;
+  overflow-y: scroll;
+  padding-bottom: 16px;
 }
 
 .profile__selected {
-  margin-top: 32px;
   width: 70vw;
 }
 </style>
