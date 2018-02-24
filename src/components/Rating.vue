@@ -5,7 +5,7 @@
       class="rating__container--star"
       :class="{ checked: rating + n > 5}"
       :key="n"
-      @click="handleRatingSelected(6 - n)">
+      @click="handleRatingSelected({ rating: 6 - n })">
       ☆
     </span>
   </div>

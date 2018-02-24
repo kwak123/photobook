@@ -27,13 +27,13 @@ export default {
   },
   methods: {
     onEditComplete() {
-      this.handleEditComplete(this.contentType, this.$el.innerText);
+      this.handleEditComplete({ [this.contentType]: this.$el.innerText });
     },
     onKeyDown(e) {
       if (e.keyCode === 13) {
         e.preventDefault();
         this.$el.blur();
-        this.handleEditComplete();
+        this.onEditComplete();
       }
     },
   },

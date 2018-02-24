@@ -1,35 +1,35 @@
 <template>
   <div class="photodetail__container">
     <div
-      class="photodetail__inner"
-      v-if="url">
+      v-if="url"
+      class="photodetail__inner">
       <Editable
         class="photodetail__inner--title"
         :content="title"
-        :handleEditComplete="handleEditComplete"
+        :handleEditComplete="setPhotoTitle"
         content-type="title" />
       <img class="photodetail__inner--photo" v-bind:src="url" alt="photo.url"/>
       <Rating
         class="photodetail__inner--rating"
         :rating="rating"
-        :handleRatingSelected="handleRatingSelected"/>
+        :handleRatingSelected="setPhotoRating"/>
       <Editable
         class="photodetail__inner--description"
         :content="description"
-        :handleEditComplete="handleEditComplete"
+        :handleEditComplete="setPhotoDescription"
         content-type="description"/>
     </div>
 
     <div
-      class="photodetail__empty"
-      v-else>
+      v-else
+      class="photodetail__empty">
       <p>Select a photo</p>
     </div>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapMutations } from 'vuex';
 
 import Editable from './Editable';
 import Rating from './Rating';
@@ -40,7 +40,11 @@ export default {
     Editable,
     Rating,
   },
-  props: ['handleEditComplete', 'handleRatingSelected'],
+  methods: mapMutations([
+    'setPhotoTitle',
+    'setPhotoRating',
+    'setPhotoDescription',
+  ]),
   computed: {
     ...mapState({
       url: state => state.photos.selectedPhoto.url,
