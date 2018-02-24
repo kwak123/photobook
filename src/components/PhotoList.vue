@@ -1,7 +1,9 @@
 <template>
   <div class="photolist__container">
     <h2 class="photolist__header">Portfolio</h2>
-    <div class="photolist__inner">
+    <div
+      class="photolist__inner"
+      v-if="photoList.length">
       <div
         class="photolist__inner--grid-item"
         v-for="(photo, idx) in photoList"
@@ -13,16 +15,25 @@
           alt="photo.url"/>
       </div>
     </div>
+    <Loading v-else />
   </div>
 </template>
 
 <script>
+import Loading from './Loading';
+
 export default {
   name: 'PhotoList',
-  props: ['photo-list', 'handlePhotoSelected'],
+  props: ['handlePhotoSelected'],
+  components: { Loading },
   methods: {
     onPhotoSelected(idx) {
       this.handlePhotoSelected(idx);
+    },
+  },
+  computed: {
+    photoList() {
+      return this.$store.state.photos.photoList;
     },
   },
 };

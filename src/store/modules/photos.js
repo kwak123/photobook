@@ -2,12 +2,13 @@ import photobookApi from '../../api/photobook';
 
 const state = {
   photoList: [],
+  selectedPhoto: {},
 };
 
 const actions = {
-  fetchPhotos({ commit }) {
-    return photobookApi.fetchPhotos()
-      .then(photoList => commit('setPhotoList', photoList));
+  fetchPhotoList({ commit }) {
+    return photobookApi.fetchPhotoList()
+      .then(photoList => commit('setPhotoList', { photoList }));
   },
 };
 

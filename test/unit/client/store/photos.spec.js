@@ -1,8 +1,8 @@
-import photoListStore from '@/store/modules/photo-list';
+import photos from '@/store/modules/photos';
 
-describe('photoListStore', () => {
+describe('photos', () => {
   describe('state', () => {
-    const { state } = photoListStore;
+    const { state } = photos;
 
     it('should have a default of empty array called photoList', () => {
       expect(state.photoList).toEqual([]);
@@ -10,22 +10,23 @@ describe('photoListStore', () => {
   });
 
   describe('actions', () => {
-    const { actions } = photoListStore;
+    const { actions } = photos;
 
     const commit = (type, payload) => {
       expect(type).toEqual('setPhotoList');
       expect(payload).toBeTruthy();
+      expect(payload).toHaveProperty('photoList');
     };
 
-    describe('fetchPhotos', () => {
-      const { fetchPhotos } = actions;
+    describe('fetchPhotoList', () => {
+      const { fetchPhotoList } = actions;
 
-      it('should be able to fetch photos', () => fetchPhotos({ commit }));
+      it('should be able to fetch photos', () => fetchPhotoList({ commit }));
     });
   });
 
   describe('getters', () => {
-    const { getters } = photoListStore;
+    const { getters } = photos;
 
     describe('getPhotosAverage', () => {
       const { getPhotosAverage } = getters;
@@ -64,7 +65,7 @@ describe('photoListStore', () => {
   });
 
   describe('mutations', () => {
-    const { mutations } = photoListStore;
+    const { mutations } = photos;
 
     describe('setPhotoList', () => {
       const { setPhotoList } = mutations;

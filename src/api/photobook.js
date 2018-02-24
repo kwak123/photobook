@@ -8,7 +8,7 @@ export default {
       setTimeout(() => resolve(sampleUser), 500);
     });
   },
-  fetchPhotos() {
+  fetchPhotoList() {
     return new Promise((resolve) => {
       setTimeout(() => resolve(samplePhotos), 500);
     });

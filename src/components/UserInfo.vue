@@ -1,25 +1,30 @@
 <template>
   <div class="userinfo__container">
     <div class="userinfo__avatar">
-      <img :src="user.avatar" alt="User profile picture"/>
+      <img :src="avatar" alt="User profile picture"/>
     </div>
-    <h4 class="userinfo__username">{{ user.username }}</h4>
+    <h4 class="userinfo__username">{{ username }}</h4>
     <p class="userinfo__first">{{ first }}</p>
     <p class="userinfo__last">{{ last }}</p>
-    <p class="userinfo__average">{{ user.average }}</p>
+    <p class="userinfo__average">{{ 0 }}</p>
   </div>
 </template>
 
 <script>
 export default {
   name: 'UserInfo',
-  props: ['user'],
   computed: {
+    avatar() {
+      return this.$store.state.user.avatar;
+    },
+    username() {
+      return this.$store.state.user.username;
+    },
     first() {
-      return `First name: ${this.user.first}`;
+      return `First name: ${this.$store.state.user.first}`;
     },
     last() {
-      return `Last name: ${this.user.last}`;
+      return `Last name: ${this.$store.state.user.last}`;
     },
   },
 };

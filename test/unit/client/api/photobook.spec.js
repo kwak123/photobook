@@ -10,10 +10,10 @@ describe('photobookApi', () => {
     }));
   });
 
-  describe('fetchPhotos', () => {
-    const { fetchPhotos } = photobook;
+  describe('fetchPhotoList', () => {
+    const { fetchPhotoList } = photobook;
 
-    it('should be able to return a list of photos', () => fetchPhotos().then((photos) => {
+    it('should be able to return a list of photos', () => fetchPhotoList().then((photos) => {
       expect(Array.isArray(photos)).toBeTruthy();
     }));
   });
