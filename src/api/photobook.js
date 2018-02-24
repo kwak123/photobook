@@ -3,12 +3,12 @@ import samplePhotos from '../../sample.json';
 
 export default {
   // Stub
-  getUser() {
+  fetchUser() {
     return new Promise((resolve) => {
       setTimeout(() => resolve(sampleUser), 500);
     });
   },
-  getPhotos() {
+  fetchPhotos() {
     return new Promise((resolve) => {
       setTimeout(() => resolve(samplePhotos), 500);
     });

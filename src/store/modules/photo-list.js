@@ -1,5 +1,15 @@
+import photobookApi from '../../api/photobook';
+
 const state = {
   photoList: [],
+};
+
+const actions = {
+  fetchPhotos({ commit }) {
+    photobookApi.fetchPhotos()
+      .then(photoList => commit('setPhotoList', photoList))
+      .catch(error => console.log(error));
+  },
 };
 
 const getters = {
@@ -37,5 +47,6 @@ const mutations = {
 export default {
   state,
   getters,
+  actions,
   mutations,
 };

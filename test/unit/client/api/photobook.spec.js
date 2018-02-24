@@ -1,19 +1,19 @@
 import photobook from '@/api/photobook';
 
 describe('photobookApi', () => {
-  describe('getUser', () => {
-    const { getUser } = photobook;
+  describe('fetchUser', () => {
+    const { fetchUser } = photobook;
 
-    it('should be able to return a user object', () => getUser().then((user) => {
+    it('should be able to return a user object', () => fetchUser().then((user) => {
       expect(typeof user).toEqual('object');
       expect(user).toBeTruthy();
     }));
   });
 
-  describe('getPhotos', () => {
-    const { getPhotos } = photobook;
+  describe('fetchPhotos', () => {
+    const { fetchPhotos } = photobook;
 
-    it('should be able to return a list of photos', () =>getPhotos().then((photos) => {
+    it('should be able to return a list of photos', () => fetchPhotos().then((photos) => {
       expect(Array.isArray(photos)).toBeTruthy();
     }));
   });

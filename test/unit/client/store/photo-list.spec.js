@@ -9,6 +9,60 @@ describe('photoListStore', () => {
     });
   });
 
+  describe('actions', () => {
+    const { actions } = photoListStore;
+
+    const mockCommit = (type, payload) => {
+      expect(type).toEqual('setPhotoList');
+      expect(payload).toBeTruthy();
+    };
+
+    describe('fetchPhotos', () => {
+      const { fetchPhotos } = actions;
+
+      it('should be able to fetch photos', () => fetchPhotos({ mockCommit }));
+    });
+  });
+
+  describe('getters', () => {
+    const { getters } = photoListStore;
+
+    describe('getPhotosAverage', () => {
+      const { getPhotosAverage } = getters;
+
+      it('should be able to return an average rating from a list of photos as a string, to one dec point', () => {
+        const state = {
+          photoList: [
+            { rating: 3 },
+            { rating: 5 },
+          ],
+        };
+        // Expect 4.0
+        const result = getPhotosAverage(state);
+        expect(result).toEqual('4.0');
+      });
+
+      it('should return 0.0 if no ratings are available yet', () => {
+        const state = { photoList: [] };
+        const result = getPhotosAverage(state);
+        expect(result).toEqual('0.0');
+      });
+
+      it('should ignore ratings of 0 (unrated)', () => {
+        const state = {
+          photoList: [
+            { rating: 3 },
+            { rating: 5 },
+            { rating: 0 },
+          ],
+        };
+        // Expect 4.0 still
+        const result = getPhotosAverage(state);
+        expect(result).toEqual('4.0');
+      });
+    });
+  });
+
   describe('mutations', () => {
     const { mutations } = photoListStore;
 
@@ -126,45 +180,6 @@ describe('photoListStore', () => {
         ];
         setPhotoDescription(state, { idx: 100000, description: 'Are you even trying to guess a good index?' });
         expect(state.photoList).toEqual(expected);
-      });
-    });
-  });
-
-  describe('getters', () => {
-    const { getters } = photoListStore;
-
-    describe('getPhotosAverage', () => {
-      const { getPhotosAverage } = getters;
-
-      it('should be able to return an average rating from a list of photos as a string, to one dec point', () => {
-        const state = {
-          photoList: [
-            { rating: 3 },
-            { rating: 5 },
-          ],
-        };
-        // Expect 4.0
-        const result = getPhotosAverage(state);
-        expect(result).toEqual('4.0');
-      });
-
-      it('should return 0.0 if no ratings are available yet', () => {
-        const state = { photoList: [] };
-        const result = getPhotosAverage(state);
-        expect(result).toEqual('0.0');
-      });
-
-      it('should ignore ratings of 0 (unrated)', () => {
-        const state = {
-          photoList: [
-            { rating: 3 },
-            { rating: 5 },
-            { rating: 0 },
-          ],
-        };
-        // Expect 4.0 still
-        const result = getPhotosAverage(state);
-        expect(result).toEqual('4.0');
       });
     });
   });
