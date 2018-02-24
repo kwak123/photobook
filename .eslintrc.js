@@ -37,7 +37,8 @@ module.exports = {
       ignorePropertyModificationsFor: [
         'state', // for vuex state
         'acc', // for reduce accumulators
-        'e' // for e.returnvalue
+        'e', // for e.returnvalue
+        'localState', // SK- my own twist given lint complains about two state decs in vuex
       ]
     }],
     // allow optionalDependencies
