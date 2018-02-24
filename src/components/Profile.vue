@@ -7,7 +7,7 @@
         v-bind="{ photoList, handlePhotoSelected }"/>
     </div>
     <div class="profile__selected">
-      <PhotoDetail v-bind:photo="photo"/>
+      <PhotoDetail v-bind="{ photo, handleEditComplete}"/>
     </div>
   </div>
 </template>
@@ -24,13 +24,14 @@ export default {
     PhotoList,
     PhotoDetail,
   },
-  props: ['photoList', 'photo', 'user', 'handlePhotoSelected'],
+  props: ['photoList', 'photo', 'user', 'handlePhotoSelected', 'handleEditComplete'],
 };
 </script>
 
 <style>
 .profile__container {
   display: flex;
+  height: 100%;
 }
 
 .profile__side-panel {
@@ -38,9 +39,12 @@ export default {
   flex-direction: column;
   align-items: center;
   width: 30vw;
+  background-color: #f9f9f9;
+  border-right: 1px lightgrey solid;
 }
 
 .profile__selected {
+  margin-top: 32px;
   width: 70vw;
 }
 </style>

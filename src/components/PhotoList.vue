@@ -1,14 +1,17 @@
 <template>
   <div class="container">
-    <div
-      class="inner"
-      v-for="(photo, idx) in photoList"
-      v-on:click="onPhotoSelected(idx)"
-      :key="idx">
-      <img
+    <h2>Portfolio</h2>
+    <div class="inner">
+      <div
         class="inner__thumbnail"
-        v-bind:src="photo.url"
-        alt="photo.url"/>
+        v-for="(photo, idx) in photoList"
+        v-on:click="onPhotoSelected(idx)"
+        :key="idx">
+        <img
+          class="inner__thumbnail--photo"
+          v-bind:src="photo.url"
+          alt="photo.url"/>
+      </div>
     </div>
   </div>
 </template>
@@ -27,12 +30,17 @@ export default {
 
 <style scoped>
 .container {
+  display: initial;
+}
+
+.inner {
   display: grid;
-  grid-template-columns: 64px 64px 64px 64px;
+  grid-template-columns: repeat(4, 64px);
+  grid-auto-rows: 64px;
   grid-gap: 8px;
 }
 
-.inner__thumbnail {
+.inner__thumbnail--photo {
   height: 64px;
   width: 64px;
   object-fit: cover;

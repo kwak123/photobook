@@ -11,7 +11,7 @@ it's much more DRY here
 <template>
   <div id="app">
     <Profile
-      v-bind="{ photoList, photo, user, handlePhotoSelected }"/>
+      v-bind="{ photoList, photo, user, handlePhotoSelected, handleEditComplete }"/>
   </div>
 </template>
 
@@ -37,7 +37,12 @@ export default {
         average: '4.0',
       },
       handlePhotoSelected: (idx) => {
-        this.photo = this.photoList[idx];
+        if (this.photo !== this.photoList[idx]) {
+          this.photo = this.photoList[idx];
+        }
+      },
+      handleEditComplete: (type, content) => {
+        this.photo[type] = content;
       },
     };
   },
@@ -45,12 +50,21 @@ export default {
 </script>
 
 <style>
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  height: 100vh;
+  width: 100vw;
 }
 </style>
