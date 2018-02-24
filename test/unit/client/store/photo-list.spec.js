@@ -1,22 +1,19 @@
 import photoListStore from '@/store/modules/photo-list';
 
-const {
-  photoListState,
-  photoListGetters,
-  photoListActions,
-  photoListMutations,
-} = photoListStore;
-
 describe('photoListStore', () => {
   describe('state', () => {
+    const { state } = photoListStore;
+
     it('should have a default of empty array called photoList', () => {
-      expect(photoListState.photoList).toEqual([]);
+      expect(state.photoList).toEqual([]);
     });
   });
 
   describe('mutations', () => {
+    const { mutations } = photoListStore;
+
     describe('setPhotoList', () => {
-      const { setPhotoList } = photoListMutations;
+      const { setPhotoList } = mutations;
 
       it('should be able to set photoList array', () => {
         const state = { photoList: [] };
@@ -37,7 +34,7 @@ describe('photoListStore', () => {
     });
 
     describe('setPhotoRating', () => {
-      const { setPhotoRating } = photoListMutations;
+      const { setPhotoRating } = mutations;
 
       it('should be able to set photo rating by idx', () => {
         const state = {
@@ -68,7 +65,7 @@ describe('photoListStore', () => {
     });
 
     describe('setPhotoTitle', () => {
-      const { setPhotoTitle } = photoListMutations;
+      const { setPhotoTitle } = mutations;
 
       it('should be able to set photo title by idx', () => {
         const state = {
@@ -99,7 +96,7 @@ describe('photoListStore', () => {
     });
 
     describe('setPhotoDescription', () => {
-      const { setPhotoDescription } = photoListMutations;
+      const { setPhotoDescription } = mutations;
 
       it('should be able to set photo description by idx', () => {
         const state = {
@@ -134,8 +131,10 @@ describe('photoListStore', () => {
   });
 
   describe('getters', () => {
+    const { getters } = photoListStore;
+
     describe('getPhotosAverage', () => {
-      const { getPhotosAverage } = photoListGetters;
+      const { getPhotosAverage } = getters;
 
       it('should be able to return an average rating from a list of photos as a string, to one dec point', () => {
         const state = {
@@ -153,6 +152,19 @@ describe('photoListStore', () => {
         const state = { photoList: [] };
         const result = getPhotosAverage(state);
         expect(result).toEqual('0.0');
+      });
+
+      it('should ignore ratings of 0 (unrated)', () => {
+        const state = {
+          photoList: [
+            { rating: 3 },
+            { rating: 5 },
+            { rating: 0 },
+          ],
+        };
+        // Expect 4.0 still
+        const result = getPhotosAverage(state);
+        expect(result).toEqual('4.0');
       });
     });
   });
