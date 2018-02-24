@@ -27,20 +27,17 @@ const mutations = {
       localState.photoList = photoList;
     }
   },
-  setPhotoRating(localState, { idx, rating }) {
-    if (localState.photoList[idx]) {
-      localState.photoList[idx].rating = rating;
-    }
+  setSelectedPhoto(localState, { idx }) {
+    localState.selectedPhoto = localState.photoList[idx];
   },
-  setPhotoTitle(localState, { idx, title }) {
-    if (localState.photoList[idx]) {
-      localState.photoList[idx].title = title;
-    }
+  setPhotoRating(localState, { rating }) {
+    localState.selectedPhoto.rating = rating;
   },
-  setPhotoDescription(localState, { idx, description }) {
-    if (localState.photoList[idx]) {
-      localState.photoList[idx].description = description;
-    }
+  setPhotoTitle(localState, { title }) {
+    localState.selectedPhoto.title = title;
+  },
+  setPhotoDescription(localState, { description }) {
+    localState.selectedPhoto.description = description;
   },
 };
 

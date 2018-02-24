@@ -40,6 +40,13 @@ export default {
 </script>
 
 <style>
+.photolist__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: fit-content;
+}
+
 .photolist__inner {
   display: grid;
   grid-template-columns: repeat(4, 64px);
