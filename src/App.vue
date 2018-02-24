@@ -18,12 +18,14 @@ it's much more DRY here
 
 <script>
 import Profile from './components/Profile';
+import store from './store';
 
 import sampleData from '../sample.json';
 import sampleUser from '../sample-user.json';
 
 export default {
   name: 'App',
+  store,
   components: {
     Profile,
   },
