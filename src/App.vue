@@ -1,20 +1,26 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <HelloWorld/>
     <UserInfo />
+    <PhotoList v-bind:photo-list="photoList"/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
 import UserInfo from './components/UserInfo';
+import PhotoList from './components/PhotoList';
+
+import sampleData from '../sample.json';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld,
     UserInfo,
+    PhotoList,
+  },
+  data() {
+    return {
+      photoList: sampleData,
+    };
   },
 };
 </script>

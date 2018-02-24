@@ -11,7 +11,6 @@ const photoListGetters = {
 };
 
 const photoListActions = {
-
 };
 
 const photoListMutations = {
