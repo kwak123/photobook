@@ -49,6 +49,12 @@ export default {
 .editable__input {
   outline: none;
   padding-bottom: 4px;
+  cursor: text;
+}
+
+.editable__input:empty {
+  /* Needed to show blinking cursor when empty */
+  padding: 0 1px;
 }
 
 .editable__input:empty:not(:focus):before {
