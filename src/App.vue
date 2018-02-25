@@ -15,6 +15,8 @@ it's much more DRY here
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 import Profile from './components/Profile';
 import store from './store';
 
@@ -25,9 +27,10 @@ export default {
     Profile,
   },
   mounted() {
-    this.$store.dispatch('fetchUser');
-    this.$store.dispatch('fetchPhotoList');
+    this.fetchUser();
+    this.fetchPhotoList();
   },
+  methods: mapActions(['fetchUser', 'fetchPhotoList']),
 };
 </script>
 

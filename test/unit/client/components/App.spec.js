@@ -32,7 +32,6 @@ describe('App', () => {
 
   it('should dispatch fetchUser and fetchPhotoList on mounted', () => {
     shallow(App, { store });
-    /* THIS ISN'T PASSING IN THE LINE COVERAGE? */
     expect(actions.fetchUser).toHaveBeenCalled();
     expect(actions.fetchPhotoList).toHaveBeenCalled();
   });

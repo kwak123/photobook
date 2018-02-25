@@ -62,7 +62,7 @@ describe('Rating', () => {
           { className: [], innerHTML: '☆' },
           { className: [], innerHTML: '☆' },
         ];
-        
+
         const wrapper = mount(Rating);
         wrapper.vm.handleStars(children);
         expect(children).toEqual(expected);
