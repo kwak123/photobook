@@ -10,26 +10,31 @@ const oldFetchPhotoList = photobookApi.fetchPhotoList;
 
 // Mock out API functions
 
+const mock = ({ pass, success, error }) => new Promise((resolve, reject) => {
+  if (pass) {
+    setTimeout(() => resolve(success), 100);
+  } else {
+    setTimeout(() => reject(error), 100);
+  }
+});
+
 /**
  * Stub out API functions with Promises that resolve with mock data.
  * Will resolve by default
  * @param {boolean} pass true if you want to pass, false if you want to catch
  */
 const mockOutApi = (pass = true) => {
-  photobookApi.fetchUser = () => new Promise((resolve, reject) => {
-    if (pass) {
-      setTimeout(() => resolve({ /* Mock User data */ }), 100);
-    } else {
-      setTimeout(() => reject({ message: 'Mock error message' }), 100);
-    }
+  const error = { message: 'Mock error message' };
+  photobookApi.fetchUser = () => mock({
+    pass,
+    error,
+    success: { /* Mock user data */ },
   });
 
-  photobookApi.fetchPhotoList = () => new Promise((resolve, reject) => {
-    if (pass) {
-      setTimeout(() => resolve([/* Mock photo list */]));
-    } else {
-      setTimeout(() => reject({ message: 'Mock error message' }), 100);
-    }
+  photobookApi.fetchPhotoList = () => mock({
+    pass,
+    error,
+    success: [/* Mock photo list */],
   });
 };
 
