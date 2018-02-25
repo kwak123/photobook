@@ -8,7 +8,7 @@ describe('photos', () => {
     it('should have photoList array, selectedPhoto object, fetching bool, and error string', () => {
       expect(state.photoList).toEqual([]);
       expect(state.selectedPhoto).toEqual({});
-      expect(state.fetching).toBe(false);
+      expect(state.requesting).toBe(false);
       expect(state.error).toBe('');
     });
   });
@@ -20,14 +20,14 @@ describe('photos', () => {
       const { fetchPhotoList } = actions;
 
       it('should be able to fetch photos', () => testAction(fetchPhotoList, null, {}, [
-        { type: 'setFetchingStart' },
-        { type: 'setFetchingComplete' },
+        { type: 'setRequestingStart' },
+        { type: 'setRequestingComplete' },
         { type: 'setPhotoList', payload: { photoList: [] } },
       ], true));
 
       it('should be able to handle failed photos', () => testAction(fetchPhotoList, null, {}, [
-        { type: 'setFetchingStart' },
-        { type: 'setFetchingComplete' },
+        { type: 'setRequestingStart' },
+        { type: 'setRequestingComplete' },
         { type: 'setError', payload: { error: 'Mock error message' } },
       ], false));
     });
@@ -166,23 +166,23 @@ describe('photos', () => {
       });
     });
 
-    describe('setFetchingStart', () => {
-      const { setFetchingStart } = mutations;
+    describe('setRequestingStart', () => {
+      const { setRequestingStart } = mutations;
 
-      it('should set fetching to true', () => {
-        const state = { fetching: false };
-        setFetchingStart(state);
-        expect(state.fetching).toBe(true);
+      it('should set requesting to true', () => {
+        const state = { requesting: false };
+        setRequestingStart(state);
+        expect(state.requesting).toBe(true);
       });
     });
 
-    describe('setFetchingComplete', () => {
-      const { setFetchingComplete } = mutations;
+    describe('setRequestingComplete', () => {
+      const { setRequestingComplete } = mutations;
 
-      it('should set fetching to false', () => {
-        const state = { fetching: true };
-        setFetchingComplete(state);
-        expect(state.fetching).toBe(false);
+      it('should set requesting to false', () => {
+        const state = { requesting: true };
+        setRequestingComplete(state);
+        expect(state.requesting).toBe(false);
       });
     });
 

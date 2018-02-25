@@ -49,6 +49,7 @@ describe('photobookApi', () => {
         rating: 'test',
         description: 'test',
       };
+
       moxios.wait(() => {
         const request = moxios.requests.mostRecent();
         expect(JSON.parse(request.config.data)).toEqual(expected);
