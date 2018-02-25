@@ -7,14 +7,14 @@ const photos = {
   },
 };
 
-const users = {
+const user = {
   fetchUser: (req, res) => {
-    const user = db.fetchUser();
-    res.send(user);
+    const currentUser = db.fetchUser();
+    res.send(currentUser);
   },
 };
 
 module.exports = {
   photos,
-  users,
+  user,
 };

@@ -20,12 +20,6 @@ describe('App', () => {
     });
   });
 
-  it('should have a store', () => {
-    const wrapper = shallow(App, { localVue });
-    const vm = wrapper.vm;
-    expect(vm.$store).toBeTruthy();
-  });
-
   it('should have a mounted hook', () => {
     expect(typeof App.mounted).toBe('function');
   });
