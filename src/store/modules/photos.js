@@ -9,26 +9,26 @@ const state = {
 
 const actions = {
   fetchPhotoList({ commit }) {
-    commit('setRequestingStart');
+    commit('setPhotoRequestingStart');
     return photobookApi.fetchPhotoList()
       .then((photoList) => {
-        commit('setRequestingComplete');
+        commit('setPhotoRequestingComplete');
         commit('setPhotoList', { photoList });
       })
       .catch((error) => {
-        commit('setRequestingComplete');
+        commit('setPhotoRequestingComplete');
         commit('setError', { error: error.message });
       });
   },
   postPhotoUpdate({ commit }, payload) {
-    commit('setRequestingStart');
+    commit('setPhotoRequestingStart');
     return photobookApi.postPhotoUpdate(payload)
       .then(() => {
-        commit('setRequestingComplete');
+        commit('setPhotoRequestingComplete');
         commit('updateSelectedPhoto', payload);
       })
       .catch((error) => {
-        commit('setRequestingComplete');
+        commit('setPhotoRequestingComplete');
         commit('setError', { error: error.message });
       });
   },
@@ -61,10 +61,10 @@ const mutations = {
   setPhotoDescription(localState, { description }) {
     localState.selectedPhoto.description = description;
   },
-  setRequestingStart(localState) {
+  setPhotoRequestingStart(localState) {
     localState.requesting = true;
   },
-  setRequestingComplete(localState) {
+  setPhotoRequestingComplete(localState) {
     localState.requesting = false;
   },
   setError(localState, { error }) {

@@ -1,16 +1,19 @@
 import user from '@/store/modules/user';
 
+import testAction from './test-action';
+
 describe('userModule', () => {
   describe('state', () => {
     const { state } = user;
 
-    it('should have a default state with avatar, username, first, last, and rating', () => {
+    it('should have a default of avatar, username, first, last, rating, and requesting', () => {
       const expected = {
         avatar: '',
         username: '',
         first: '',
         last: '',
         rating: '',
+        requesting: false,
       };
       expect(state).toEqual(expected);
     });
@@ -19,14 +22,14 @@ describe('userModule', () => {
   describe('actions', () => {
     const { actions } = user;
 
-    const commit = (type, payload) => {
-      expect(type).toEqual('setUser');
-      expect(payload).toBeTruthy();
-    };
-
     describe('fetchUser', () => {
       const { fetchUser } = actions;
-      xit('should be able to fetch a user and commit mutation', () => fetchUser({ commit }));
+
+      it('should be able to fetch user', () => testAction(fetchUser, null, {}, [
+        { type: 'setUserRequestingStart' },
+        { type: 'setUserRequestingComplete' },
+        { type: 'setUser', payload: {/* Mock user data */} },
+      ]), true);
     });
   });
 

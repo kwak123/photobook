@@ -20,14 +20,14 @@ describe('photos', () => {
       const { fetchPhotoList } = actions;
 
       it('should be able to fetch photos', () => testAction(fetchPhotoList, null, {}, [
-        { type: 'setRequestingStart' },
-        { type: 'setRequestingComplete' },
+        { type: 'setPhotoRequestingStart' },
+        { type: 'setPhotoRequestingComplete' },
         { type: 'setPhotoList', payload: { photoList: [] } },
       ], true));
 
       it('should be able to handle failed photos', () => testAction(fetchPhotoList, null, {}, [
-        { type: 'setRequestingStart' },
-        { type: 'setRequestingComplete' },
+        { type: 'setPhotoRequestingStart' },
+        { type: 'setPhotoRequestingComplete' },
         { type: 'setError', payload: { error: 'Mock error message' } },
       ], false));
     });
@@ -38,8 +38,8 @@ describe('photos', () => {
       it('should be to request photo update', () => {
         const testPayload = { id: '1', title: 'test' };
         return testAction(postPhotoUpdate, testPayload, {}, [
-          { type: 'setRequestingStart' },
-          { type: 'setRequestingComplete' },
+          { type: 'setPhotoRequestingStart' },
+          { type: 'setPhotoRequestingComplete' },
           { type: 'updateSelectedPhoto', payload: testPayload },
         ], true);
       });
@@ -47,8 +47,8 @@ describe('photos', () => {
       it('should be able to handle failed update, and not emit update', () => {
         const testPayload = { id: '1', title: 'test' };
         return testAction(postPhotoUpdate, testPayload, {}, [
-          { type: 'setRequestingStart' },
-          { type: 'setRequestingComplete' },
+          { type: 'setPhotoRequestingStart' },
+          { type: 'setPhotoRequestingComplete' },
           { type: 'setError', payload: { error: 'Mock error message' } },
         ], false);
       });
@@ -188,22 +188,22 @@ describe('photos', () => {
       });
     });
 
-    describe('setRequestingStart', () => {
-      const { setRequestingStart } = mutations;
+    describe('setPhotoRequestingStart', () => {
+      const { setPhotoRequestingStart } = mutations;
 
       it('should set requesting to true', () => {
         const state = { requesting: false };
-        setRequestingStart(state);
+        setPhotoRequestingStart(state);
         expect(state.requesting).toBe(true);
       });
     });
 
-    describe('setRequestingComplete', () => {
-      const { setRequestingComplete } = mutations;
+    describe('setPhotoRequestingComplete', () => {
+      const { setPhotoRequestingComplete } = mutations;
 
       it('should set requesting to false', () => {
         const state = { requesting: true };
-        setRequestingComplete(state);
+        setPhotoRequestingComplete(state);
         expect(state.requesting).toBe(false);
       });
     });
