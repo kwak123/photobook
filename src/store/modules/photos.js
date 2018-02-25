@@ -17,7 +17,7 @@ const actions = {
       })
       .catch((error) => {
         commit('setPhotoRequestingComplete');
-        commit('setError', { error: error.message });
+        commit('setPhotoError', { error: error.message });
       });
   },
   postPhotoUpdate({ commit }, payload) {
@@ -29,7 +29,7 @@ const actions = {
       })
       .catch((error) => {
         commit('setPhotoRequestingComplete');
-        commit('setError', { error: error.message });
+        commit('setPhotoError', { error: error.message });
       });
   },
 };
@@ -67,7 +67,7 @@ const mutations = {
   setPhotoRequestingComplete(localState) {
     localState.requesting = false;
   },
-  setError(localState, { error }) {
+  setPhotoError(localState, { error }) {
     localState.error = error;
   },
   updateSelectedPhoto(localState, properties) {

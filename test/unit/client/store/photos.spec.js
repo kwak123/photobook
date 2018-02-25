@@ -28,7 +28,7 @@ describe('photos', () => {
       it('should be able to handle failed photos', () => testAction(fetchPhotoList, null, {}, [
         { type: 'setPhotoRequestingStart' },
         { type: 'setPhotoRequestingComplete' },
-        { type: 'setError', payload: { error: 'Mock error message' } },
+        { type: 'setPhotoError', payload: { error: 'Mock error message' } },
       ], false));
     });
 
@@ -49,7 +49,7 @@ describe('photos', () => {
         return testAction(postPhotoUpdate, testPayload, {}, [
           { type: 'setPhotoRequestingStart' },
           { type: 'setPhotoRequestingComplete' },
-          { type: 'setError', payload: { error: 'Mock error message' } },
+          { type: 'setPhotoError', payload: { error: 'Mock error message' } },
         ], false);
       });
     });
@@ -208,12 +208,12 @@ describe('photos', () => {
       });
     });
 
-    describe('setError', () => {
-      const { setError } = mutations;
+    describe('setPhotoError', () => {
+      const { setPhotoError } = mutations;
 
       it('should be able to set error string from error object message property', () => {
         const state = { error: '' };
-        setError(state, { error: 'Mock error' });
+        setPhotoError(state, { error: 'Mock error' });
         expect(state.error).toEqual('Mock error');
       });
     });
