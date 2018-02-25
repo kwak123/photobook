@@ -7,13 +7,14 @@ Based on https://codelike.pro/create-a-contenteditable-with-vue/
     class="editable__input"
     contenteditable="true"
     :data-text="empty"
-    @input="$emit('update:content', $event.target.innerText)"
     @keydown="onKeyDown"
     @blur="onEditComplete"></div>
 </template>
 
 
 <script>
+
+    // @input="$emit('update:content', $event.target.innerText)"
 export default {
   name: 'Editable',
   props: ['content', 'contentType', 'handleEditComplete'],
@@ -58,7 +59,7 @@ export default {
 }
 
 .editable__input:empty:not(:focus):before {
-  content:attr(data-text);
+  content: attr(data-text);
   color: lightgrey;
 }
 </style>

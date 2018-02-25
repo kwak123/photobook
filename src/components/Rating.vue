@@ -16,15 +16,15 @@ export default {
   name: 'Rating',
   props: ['rating', 'handleRatingSelected'],
   mounted() {
-    this.handleStars();
+    this.handleStars(this.$el.children);
   },
   updated() {
-    this.handleStars();
+    this.handleStars(this.$el.children);
   },
   methods: {
-    handleStars() {
-      for (let i = 0; i < this.$el.children.length; i += 1) {
-        const el = this.$el.children[i];
+    handleStars(children) {
+      for (let i = 0; i < children.length; i += 1) {
+        const el = children[i];
         if (el.className.includes('checked')) {
           el.innerHTML = '★';
         } else {
