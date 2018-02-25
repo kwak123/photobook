@@ -1,13 +1,10 @@
-import Vuex from 'vuex';
 import { mount, createLocalVue } from '@vue/test-utils';
 
 import UserInfo from '@/components/UserInfo';
 
 const localVue = createLocalVue();
-localVue.use(Vuex);
 
 describe('UserInfo', () => {
-
   it('should fetch render information from $store.state in computed', () => {
     const user = {
       avatar: 'testAvatar',
@@ -18,13 +15,14 @@ describe('UserInfo', () => {
     };
 
     const wrapper = mount(UserInfo, {
+      localVue,
       mocks: {
         $store: {
           state: { user },
         },
       },
-    }, localVue);
-    
+    });
+
     const avatarAttr = wrapper.find('.userinfo__avatar--img').attributes();
     expect(avatarAttr.src).toEqual(user.avatar);
 

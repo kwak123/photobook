@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex';
+import { mapMutations, mapState } from 'vuex';
 
 import Loading from './Loading';
 
@@ -28,11 +28,9 @@ export default {
   name: 'PhotoList',
   components: { Loading },
   methods: mapMutations(['setSelectedPhoto']),
-  computed: {
-    photoList() {
-      return this.$store.state.photos.photoList;
-    },
-  },
+  computed: mapState({
+    photoList: (state) => state.photos.photoList,
+  }),
 };
 </script>
 
