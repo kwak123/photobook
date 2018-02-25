@@ -5,13 +5,22 @@
 import photobookApi from '@/api/photobook';
 
 // Hold original functions for restoring
+
 const oldFetchUser = photobookApi.fetchUser;
 const oldFetchPhotoList = photobookApi.fetchPhotoList;
 
 // Mock out API functions
 
-const mock = ({ pass, success, error }) => new Promise((resolve, reject) => {
-  if (pass) {
+/**
+ * Initiates Promise to replace api calls, simulating success based on resolves prop.
+ * VSCode does not yet support this style of documentation.
+ * @param {Object}  options - options object.
+ * @param {boolean} options.resolves - whether the Promise resolves or not.
+ * @param {*} options.success - Payload for resolved Promise.
+ * @param {*} options.error - Payload for rejected Promise.
+ */
+const mock = ({ resolves, success, error }) => new Promise((resolve, reject) => {
+  if (resolves) {
     setTimeout(() => resolve(success), 100);
   } else {
     setTimeout(() => reject(error), 100);
@@ -23,16 +32,16 @@ const mock = ({ pass, success, error }) => new Promise((resolve, reject) => {
  * Will resolve by default
  * @param {boolean} pass true if you want to pass, false if you want to catch
  */
-const mockOutApi = (pass = true) => {
+const mockOutApi = (resolves = true) => {
   const error = { message: 'Mock error message' };
   photobookApi.fetchUser = () => mock({
-    pass,
+    resolves,
     error,
     success: { /* Mock user data */ },
   });
 
   photobookApi.fetchPhotoList = () => mock({
-    pass,
+    resolves,
     error,
     success: [/* Mock photo list */],
   });
