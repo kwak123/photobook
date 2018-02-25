@@ -1,28 +1,35 @@
 import photos from '@/store/modules/photos';
+import testAction from './test-action';
 
 describe('photos', () => {
   describe('state', () => {
     const { state } = photos;
 
-    it('should have a default of array photoList and object selectedPhoto', () => {
+    it('should have photoList array, selectedPhoto object, fetching bool, and error string', () => {
       expect(state.photoList).toEqual([]);
       expect(state.selectedPhoto).toEqual({});
+      expect(state.fetching).toBe(false);
+      expect(state.error).toBe('');
     });
   });
 
   describe('actions', () => {
     const { actions } = photos;
 
-    const commit = (type, payload) => {
-      expect(type).toEqual('setPhotoList');
-      expect(payload).toBeTruthy();
-      expect(payload).toHaveProperty('photoList');
-    };
-
     describe('fetchPhotoList', () => {
       const { fetchPhotoList } = actions;
 
-      it('should be able to fetch photos', () => fetchPhotoList({ commit }));
+      it('should be able to fetch photos', () => testAction(fetchPhotoList, null, {}, [
+        { type: 'setFetchingStart' },
+        { type: 'setFetchingComplete' },
+        { type: 'setPhotoList', payload: { photoList: [] } },
+      ], true));
+
+      it('should be able to handle failed photos', () => testAction(fetchPhotoList, null, {}, [
+        { type: 'setFetchingStart' },
+        { type: 'setFetchingComplete' },
+        { type: 'setError', payload: { error: 'Mock error message' } },
+      ], false));
     });
   });
 
@@ -156,6 +163,36 @@ describe('photos', () => {
         expect(state.selectedPhoto.description).toEqual(testOne.description);
         setPhotoDescription(state, testTwo);
         expect(state.selectedPhoto.description).toEqual(testTwo.description);
+      });
+    });
+
+    describe('setFetchingStart', () => {
+      const { setFetchingStart } = mutations;
+
+      it('should set fetching to true', () => {
+        const state = { fetching: false };
+        setFetchingStart(state);
+        expect(state.fetching).toBe(true);
+      });
+    });
+
+    describe('setFetchingComplete', () => {
+      const { setFetchingComplete } = mutations;
+
+      it('should set fetching to false', () => {
+        const state = { fetching: true };
+        setFetchingComplete(state);
+        expect(state.fetching).toBe(false);
+      });
+    });
+
+    describe('setError', () => {
+      const { setError } = mutations;
+
+      it('should be able to set error string from error object message property', () => {
+        const state = { error: '' };
+        setError(state, { error: 'Mock error' });
+        expect(state.error).toEqual('Mock error');
       });
     });
   });

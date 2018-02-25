@@ -3,12 +3,22 @@ import photobookApi from '../../api/photobook';
 const state = {
   photoList: [],
   selectedPhoto: {},
+  fetching: false,
+  error: '',
 };
 
 const actions = {
   fetchPhotoList({ commit }) {
+    commit('setFetchingStart');
     return photobookApi.fetchPhotoList()
-      .then(photoList => commit('setPhotoList', { photoList }));
+      .then((photoList) => {
+        commit('setFetchingComplete');
+        commit('setPhotoList', { photoList });
+      })
+      .catch((error) => {
+        commit('setFetchingComplete');
+        commit('setError', { error: error.message });
+      });
   },
 };
 
@@ -38,6 +48,15 @@ const mutations = {
   },
   setPhotoDescription(localState, { description }) {
     localState.selectedPhoto.description = description;
+  },
+  setFetchingStart(localState) {
+    localState.fetching = true;
+  },
+  setFetchingComplete(localState) {
+    localState.fetching = false;
+  },
+  setError(localState, { error }) {
+    localState.error = error;
   },
 };
 

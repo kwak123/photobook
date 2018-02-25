@@ -45,14 +45,12 @@ export default {
     'setPhotoRating',
     'setPhotoDescription',
   ]),
-  computed: {
-    ...mapState({
-      url: state => state.photos.selectedPhoto.url,
-      title: state => state.photos.selectedPhoto.title,
-      rating: state => state.photos.selectedPhoto.rating,
-      description: state => state.photos.selectedPhoto.description,
-    }),
-  },
+  computed: mapState({
+    url: state => state.photos.selectedPhoto.url,
+    title: state => state.photos.selectedPhoto.title,
+    rating: state => state.photos.selectedPhoto.rating,
+    description: state => state.photos.selectedPhoto.description,
+  }),
 };
 </script>
 
