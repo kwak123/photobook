@@ -27,4 +27,38 @@ describe('photobookApi', () => {
       });
     });
   });
+
+  describe('postPhotoUpdate', () => {
+    const { postPhotoUpdate } = photobook;
+
+    it('should be able to post photo updates', () => {
+      moxios.wait(() => {
+        const request = moxios.requests.mostRecent();
+        expect(request.url).toEqual('/api/photos/update');
+        expect(request.config.method).toEqual('post');
+        request.respondWith({ status: 200 });
+      });
+
+      return postPhotoUpdate({});
+    });
+
+    it('should only pass along id, title, rating, and description', () => {
+      const expected = {
+        id: 1,
+        title: 'test',
+        rating: 'test',
+        description: 'test',
+      };
+      moxios.wait(() => {
+        const request = moxios.requests.mostRecent();
+        expect(JSON.parse(request.config.data)).toEqual(expected);
+        request.respondWith({ status: 200 });
+      });
+
+      return postPhotoUpdate({
+        ...expected,
+        unused: 'this should not be in moxios',
+      });
+    });
+  });
 });
