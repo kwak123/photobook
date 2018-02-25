@@ -20,9 +20,18 @@ const actions = {
         commit('setError', { error: error.message });
       });
   },
-  postPhotoUpdate({ commit }, { id, title, rating, description }) {
-
-  }
+  postPhotoUpdate({ commit }, payload) {
+    commit('setRequestingStart');
+    return photobookApi.postPhotoUpdate(payload)
+      .then(() => {
+        commit('setRequestingComplete');
+        commit('updateSelectedPhoto', payload);
+      })
+      .catch((error) => {
+        commit('setRequestingComplete');
+        commit('setError', { error: error.message });
+      });
+  },
 };
 
 const getters = {
@@ -60,6 +69,10 @@ const mutations = {
   },
   setError(localState, { error }) {
     localState.error = error;
+  },
+  updateSelectedPhoto(localState, properties) {
+    // This will need some sanity checking in the future
+    Object.assign(localState.selectedPhoto, properties);
   },
 };
 

@@ -8,6 +8,7 @@ import photobookApi from '@/api/photobook';
 
 const oldFetchUser = photobookApi.fetchUser;
 const oldFetchPhotoList = photobookApi.fetchPhotoList;
+const oldPostPhotoUpdate = photobookApi.postPhotoUpdate;
 
 // Mock out API functions
 
@@ -45,12 +46,19 @@ const mockOutApi = (resolves = true) => {
     error,
     success: [/* Mock photo list */],
   });
+
+  photobookApi.postPhotoUpdate = payload => mock({
+    resolves,
+    error,
+    success: payload,
+  });
 };
 
 // Restore API functions
 const restoreApi = () => {
   photobookApi.fetchUser = oldFetchUser;
   photobookApi.fetchPhotoList = oldFetchPhotoList;
+  photobookApi.postPhotoUpdate = oldPostPhotoUpdate;
 };
 
 /**
