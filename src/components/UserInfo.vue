@@ -1,32 +1,38 @@
 <template>
   <div class="userinfo__container">
-    <div class="userinfo__avatar">
-      <img :src="avatar" alt="User profile picture"/>
+    <div class="userinfo__avatar--container">
+      <img
+        class="userinfo__avatar--img"
+        :src="avatar"
+        alt="User profile picture"/>
     </div>
-    <h4 class="userinfo__username">{{ username }}</h4>
-    <p class="userinfo__first">{{ first }}</p>
-    <p class="userinfo__last">{{ last }}</p>
-    <p class="userinfo__average">{{ 0 }}</p>
+    <div class="userinfo__username--container">
+      <h4 class="userinfo__username--text">{{ username }}</h4>
+    </div>
+    <div class="userinfo__first--container">
+      <p class="userinfo__first--text">{{ first }}</p>
+    </div>
+    <div class="userinfo__last--container">
+      <p class="userinfo__last--text">{{ last }}</p>
+    </div>
+    <div class="userinfo__rating--container">
+      <p class="userinfo__rating--text">{{ rating}}</p>
+    </div>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
   name: 'UserInfo',
-  computed: {
-    avatar() {
-      return this.$store.state.user.avatar;
-    },
-    username() {
-      return this.$store.state.user.username;
-    },
-    first() {
-      return `First name: ${this.$store.state.user.first}`;
-    },
-    last() {
-      return `Last name: ${this.$store.state.user.last}`;
-    },
-  },
+  computed: mapState({
+    avatar: state => state.user.avatar,
+    username: state => state.user.username,
+    first: state => state.user.first,
+    last: state => state.user.last,
+    rating: state => state.user.rating,
+  }),
 };
 </script>
 
@@ -39,28 +45,30 @@ export default {
   align-items: center;
 }
 
-.userinfo__avatar {
+.userinfo__avatar--container {
   height: 128px;
   width: 128px;
 }
 
-.userinfo__avatar > img {
+.userinfo__avatar--img {
   height: 128px;
+  min-height: 128px;
   width: 128px;
+  min-width: 128px;
   object-fit: cover;
   border-radius: 64px;
 }
 
-.userinfo__username {
+.userinfo__username--text {
   margin: 16px 0 8px 0;
 }
 
-.userinfo__average {
+.userinfo__rating--text {
   /* width of star + space */
   margin-left: -22px;
 }
 
-.userinfo__average:before {
+.userinfo__rating--text:before {
   content: '★ ';
 }
 </style>
