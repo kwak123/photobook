@@ -7,6 +7,7 @@ const state = {
   last: '',
   rating: '',
   requesting: false,
+  error: '',
 };
 
 const actions = {
@@ -16,6 +17,10 @@ const actions = {
       .then((user) => {
         commit('setUserRequestingComplete');
         commit('setUser', user);
+      })
+      .catch((error) => {
+        commit('setUserRequestingComplete');
+        commit('setUserError', { error: error.message });
       });
   },
 };
@@ -32,6 +37,9 @@ const mutations = {
   },
   setUserRequestingComplete(localState) {
     localState.requesting = false;
+  },
+  setUserError(localState, { error }) {
+    localState.error = error;
   },
 };
 

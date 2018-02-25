@@ -6,7 +6,7 @@ describe('userModule', () => {
   describe('state', () => {
     const { state } = user;
 
-    it('should have a default of avatar, username, first, last, rating, and requesting', () => {
+    it('should default to avatar, username, first, last, rating, requesting and error', () => {
       const expected = {
         avatar: '',
         username: '',
@@ -14,6 +14,7 @@ describe('userModule', () => {
         last: '',
         rating: '',
         requesting: false,
+        error: '',
       };
       expect(state).toEqual(expected);
     });
@@ -29,7 +30,13 @@ describe('userModule', () => {
         { type: 'setUserRequestingStart' },
         { type: 'setUserRequestingComplete' },
         { type: 'setUser', payload: {/* Mock user data */} },
-      ]), true);
+      ], true));
+
+      it('should be able to set error', () => testAction(fetchUser, null, {}, [
+        { type: 'setUserRequestingStart' },
+        { type: 'setUserRequestingComplete' },
+        { type: 'setUserError', payload: { error: 'Mock error message' } },
+      ], false));
     });
   });
 
@@ -69,6 +76,36 @@ describe('userModule', () => {
         const expected = { rating: '5.0' };
         setRating(state, test);
         expect(state).toEqual(expected);
+      });
+    });
+
+    describe('setUserRequestingStart', () => {
+      const { setUserRequestingStart } = mutations;
+
+      it('should set requesting to true', () => {
+        const state = { requesting: false };
+        setUserRequestingStart(state);
+        expect(state.requesting).toBe(true);
+      });
+    });
+
+    describe('setUserRequestingComplete', () => {
+      const { setUserRequestingComplete } = mutations;
+
+      it('should set requesting to false', () => {
+        const state = { requesting: true };
+        setUserRequestingComplete(state);
+        expect(state.requesting).toBe(false);
+      });
+    });
+
+    describe('setUserError', () => {
+      const { setUserError } = mutations;
+
+      it('should set error message', () => {
+        const state = { error: '' };
+        setUserError(state, { error: 'test' });
+        expect(state.error).toEqual('test');
       });
     });
   });
