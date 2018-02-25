@@ -13,8 +13,6 @@ Based on https://codelike.pro/create-a-contenteditable-with-vue/
 
 
 <script>
-
-    // @input="$emit('update:content', $event.target.innerText)"
 export default {
   name: 'Editable',
   props: ['content', 'contentType', 'handleEditComplete'],

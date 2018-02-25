@@ -1,5 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const path = require('path');
+
+const router = require('./router');
 
 const logger = (req, res, next) => {
   console.log(`${req.method} request received at ${req.url}`);
@@ -10,13 +13,9 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(logger);
-app.use(express.static(`${__dirname}/dist`));
+app.use(express.static(path.resolve(__dirname, '../dist')));
 
-// Basic routes
-
-app.get('/api/user', (req, res) => {
-  res.sendStatus(200);
-});
+app.use('/', router);
 
 const port = process.env.port || 3000;
 app.listen(port, () => console.log(`Listening on ${port}`));

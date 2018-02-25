@@ -1,16 +1,13 @@
-import sampleUser from '../../sample-user.json';
-import samplePhotos from '../../sample.json';
+import axios from 'axios';
 
 export default {
-  // Stub
+  // Errors are handled down stream
   fetchUser() {
-    return new Promise((resolve) => {
-      setTimeout(() => resolve(sampleUser), 500);
-    });
+    return axios.get('/api/user')
+      .then(({ data }) => data);
   },
   fetchPhotoList() {
-    return new Promise((resolve) => {
-      setTimeout(() => resolve(samplePhotos), 500);
-    });
+    return axios.get('/api/photos')
+      .then(({ data }) => data);
   },
 };
