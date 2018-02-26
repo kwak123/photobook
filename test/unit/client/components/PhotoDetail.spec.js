@@ -33,6 +33,9 @@ describe('PhotoDetail', () => {
   it('should render itself based on state', () => {
     const wrapper = mount(PhotoDetail, { localVue, store });
 
+    expect(wrapper.vm.requesting).toBe(false);
+    expect(wrapper.vm.error).toEqual('');
+
     const titleEl = wrapper.find('.photodetail__inner--title').element;
     expect(titleEl.innerText).toEqual(selectedPhoto.title);
 

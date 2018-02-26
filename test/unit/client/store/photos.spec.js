@@ -24,6 +24,7 @@ describe('photos', () => {
         { type: 'setPhotoRequestingStart' },
         { type: 'setPhotoRequestingComplete' },
         { type: 'setPhotoList', payload: { photoList: [] } },
+        { type: 'setSelectedPhoto', payload: { idx: 0 } },
       ], true));
 
       it('should be able to handle failed photos', () => testAction(fetchPhotoList, user, {}, [

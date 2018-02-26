@@ -14,6 +14,7 @@ const actions = {
       .then((photoList) => {
         commit('setPhotoRequestingComplete');
         commit('setPhotoList', { photoList });
+        commit('setSelectedPhoto', { idx: 0 });
       })
       .catch((error) => {
         commit('setPhotoRequestingComplete');
