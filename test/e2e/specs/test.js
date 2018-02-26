@@ -2,18 +2,27 @@
 // http://nightwatchjs.org/guide#usage
 
 module.exports = {
-  'default e2e tests': function test(browser) {
+  'check start': function test(browser) {
     // automatically uses dev Server port from /config.index.js
     // default: http://localhost:8080
     // see nightwatch.conf.js
-    const devServer = browser.globals.devServerURL;
+
+    const server = 'localhost:3000';
 
     browser
-      .url(devServer)
+      .url(server)
       .waitForElementVisible('#app', 5000)
-      .assert.elementPresent('.hello')
-      .assert.containsText('h1', 'Welcome to Your Vue.js App')
-      .assert.elementCount('img', 1)
+      .assert.elementPresent('.profile__container')
+      .assert.elementPresent('.userinfo__container')
+      .assert.elementPresent('.photolist__container')
+      .assert.elementPresent('.photodetail__container')
+  },
+
+  'check photoList loaded and first photo selected': function test(browser) {
+    browser
+      .pause(500)
+      .assert.elementPresent('.photolist__inner')
+      .assert.elementPresent('.photodetail__inner')
       .end();
   },
 };
