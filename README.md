@@ -4,11 +4,10 @@
 
 ### Concerns:
 
-There are a lot of vulnerabilities here.
-Look into sanitizing any form of input
+Some of the initial tests from learning the test suite could be more robust
 
 
-### Goals:
+### Goals: All complete
 * Before the web app loads show placeholders for user info
 * After the web app loads begin using static user info.
 * Next, request the user's photos with an API call passing the userID to the JSON provided.
