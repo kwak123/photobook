@@ -10,7 +10,7 @@ export default {
   computed: {
     text() {
       return this.error ? this.error : this.message;
-    }
+    },
   },
 };
 </script>

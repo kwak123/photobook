@@ -2,6 +2,12 @@
 
 > Photobook is an example morpho-vue Vue.js app the shows a list of images for a user and a detailed view of a selected image.
 
+Recommended:
+```
+npm run deploy
+```
+This will handle the build process and deploying to 3000
+
 ### Concerns:
 
 Some of the initial tests from learning the test suite could be more robust

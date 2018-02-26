@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations, mapActions } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 
 import Editable from './Editable';
 import Rating from './Rating';
