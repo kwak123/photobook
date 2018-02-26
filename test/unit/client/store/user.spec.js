@@ -47,7 +47,7 @@ describe('userModule', () => {
     describe('setUser', () => {
       const { setUser } = mutations;
 
-      it('should be able to set user with matching params, excluding rating and nonmatched', () => {
+      it('should be able to set matching, excluding rating and changing id to userId', () => {
         const state = {
           userId: -1,
           avatar: '',
@@ -57,14 +57,21 @@ describe('userModule', () => {
           rating: '',
         };
         const testUser = {
-          userId: 1,
+          id: 1,
           avatar: 'test avatar',
           username: 'test username',
           first: 'test first',
           last: 'test last',
           rating: '5',
         };
-        const expected = { ...testUser, rating: '' };
+        const expected = {
+          userId: 1,
+          avatar: 'test avatar',
+          username: 'test username',
+          first: 'test first',
+          last: 'test last',
+          rating: '',
+        };
         setUser(state, testUser);
         expect(state).toEqual(expected);
       });
