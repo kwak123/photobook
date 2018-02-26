@@ -9,13 +9,16 @@
     <div class="userinfo__username--container">
       <h4 class="userinfo__username--text">{{ username }}</h4>
     </div>
-    <div class="userinfo__first--container">
+    <div class="userinfo__first--container userinfo__flex">
+      <p class="userinfo__first--title">First name:</p>
       <p class="userinfo__first--text">{{ first }}</p>
     </div>
-    <div class="userinfo__last--container">
+    <div class="userinfo__last--container userinfo__flex">
+      <p class="userinfo__last--title">Last name:</p>
       <p class="userinfo__last--text">{{ last }}</p>
     </div>
-    <div class="userinfo__rating--container">
+    <div class="userinfo__rating--container userinfo__flex">
+      <p class="userinfo__rating--title">Rating:</p>
       <p class="userinfo__rating--text">{{ rating}}</p>
     </div>
   </div>
@@ -40,9 +43,16 @@ export default {
 .userinfo__container {
   display: flex;
   min-height: fit-content;
-
   flex-direction: column;
   align-items: center;
+  width: 100%;
+}
+
+.userinfo__flex {
+  display: flex;
+  width: 80%;
+  justify-content: space-between;
+  border-bottom: 1px lightgrey solid;
 }
 
 .userinfo__avatar--container {
@@ -61,6 +71,11 @@ export default {
 
 .userinfo__username--text {
   margin: 16px 0 8px 0;
+}
+
+.userinfo__username--text:empty::before {
+  content: 'Username';
+  color: lightgrey;
 }
 
 .userinfo__rating--text {

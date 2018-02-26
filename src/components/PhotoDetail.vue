@@ -12,7 +12,7 @@
       <Rating
         class="photodetail__inner--rating"
         :rating="rating"
-        :handleRatingSelected="setPhotoRating"/>
+        :handleRatingSelected="updateRating"/>
       <Editable
         class="photodetail__inner--description"
         :content="description"
@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex';
+import { mapState, mapMutations, mapActions } from 'vuex';
 
 import Editable from './Editable';
 import Rating from './Rating';
@@ -40,11 +40,14 @@ export default {
     Editable,
     Rating,
   },
-  methods: mapMutations([
-    'setPhotoTitle',
-    'setPhotoRating',
-    'setPhotoDescription',
-  ]),
+  methods: {
+    ...mapMutations([
+      'setPhotoTitle',
+      'setPhotoRating',
+      'setPhotoDescription',
+    ]),
+    ...mapActions(['updateRating']),
+  },
   computed: mapState({
     url: state => state.photos.selectedPhoto.url,
     title: state => state.photos.selectedPhoto.title,
@@ -72,6 +75,7 @@ export default {
   margin-bottom: 16px;
   font-size: 20px;
   border-bottom: lightgrey 1px solid;
+  min-height: 28px;
 }
 
 .photodetail__inner--rating {
