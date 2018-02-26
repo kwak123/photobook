@@ -29,7 +29,7 @@ export default {
   components: { Loading },
   methods: mapMutations(['setSelectedPhoto']),
   computed: mapState({
-    photoList: (state) => state.photos.photoList,
+    photoList: state => state.photos.photoList,
   }),
 };
 </script>
