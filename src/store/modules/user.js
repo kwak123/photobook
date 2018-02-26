@@ -1,6 +1,7 @@
 import photobookApi from '../../api/photobook';
 
 const state = {
+  id: -1,
   avatar: '',
   username: '',
   first: '',
@@ -26,8 +27,8 @@ const actions = {
 };
 
 const mutations = {
-  setUser(localState, { avatar, username, first, last }) {
-    Object.assign(localState, { avatar, username, first, last });
+  setUser(localState, { id, avatar, username, first, last }) {
+    Object.assign(localState, { id, avatar, username, first, last });
   },
   setUserRating(localState, { rating }) {
     localState.rating = rating;

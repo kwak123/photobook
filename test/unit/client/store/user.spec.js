@@ -8,6 +8,7 @@ describe('userModule', () => {
 
     it('should default to avatar, username, first, last, rating, requesting and error', () => {
       const expected = {
+        id: -1,
         avatar: '',
         username: '',
         first: '',
@@ -48,6 +49,7 @@ describe('userModule', () => {
 
       it('should be able to set user with matching params, excluding rating and nonmatched', () => {
         const state = {
+          id: -1,
           avatar: '',
           username: '',
           first: '',
@@ -55,6 +57,7 @@ describe('userModule', () => {
           rating: '',
         };
         const testUser = {
+          id: 1,
           avatar: 'test avatar',
           username: 'test username',
           first: 'test first',
