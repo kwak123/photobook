@@ -25,6 +25,7 @@
     "vuex": "^3.0.1"
   },
   "devDependencies": {
+    "@cypress/webpack-preprocessor": "^1.1.3",
     "@vue/test-utils": "^1.0.0-beta.12",
     "autoprefixer": "^7.1.2",
     "babel-core": "^6.22.1",
@@ -46,6 +47,7 @@
     "cross-spawn": "^5.0.1",
     "css-loader": "^0.28.0",
     "cypress": "^2.0.4",
+    "cypress-vue-unit-test": "0.0.0-development",
     "eslint": "^4.15.0",
     "eslint-config-airbnb-base": "^11.3.0",
     "eslint-friendly-formatter": "^3.0.0",
