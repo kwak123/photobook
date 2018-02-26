@@ -49,9 +49,10 @@ describe('photobookApi', () => {
       return postPhotoUpdate({});
     });
 
-    it('should only pass along id, title, rating, and description', () => {
+    it('should only pass along userId, photoId, title, rating, and description', () => {
       const expected = {
-        id: 1,
+        userId: 1,
+        photoId: 1,
         title: 'test',
         rating: 'test',
         description: 'test',

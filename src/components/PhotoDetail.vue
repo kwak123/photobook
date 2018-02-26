@@ -6,17 +6,17 @@
       <Editable
         class="photodetail__inner--title"
         :content="title"
-        :handleEditComplete="setPhotoTitle"
+        :handleEditComplete="postPhotoUpdate"
         content-type="title" />
       <img class="photodetail__inner--photo" v-bind:src="url" alt="photo.url"/>
       <Rating
         class="photodetail__inner--rating"
         :rating="rating"
-        :handleRatingSelected="updateRating"/>
+        :handleRatingSelected="postPhotoUpdate"/>
       <Editable
         class="photodetail__inner--description"
         :content="description"
-        :handleEditComplete="setPhotoDescription"
+        :handleEditComplete="postPhotoUpdate"
         content-type="description"/>
     </div>
 

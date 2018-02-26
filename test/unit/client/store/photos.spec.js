@@ -51,7 +51,10 @@ describe('photos', () => {
           count += 1;
         };
 
-        return testAction(postPhotoUpdate, testPayload, { dispatch }, [
+        const state = { selectedPhoto: { id: 1 } };
+        const rootState = { user: { userId: 1 } };
+
+        return testAction(postPhotoUpdate, testPayload, { dispatch, state, rootState }, [
           { type: 'setPhotoRequestingStart' },
           { type: 'setPhotoRequestingComplete' },
         ], true);
@@ -59,7 +62,10 @@ describe('photos', () => {
 
       it('should be able to handle failed update, and not emit update', () => {
         const testPayload = { id: '1', title: 'test' };
-        return testAction(postPhotoUpdate, testPayload, {}, [
+        const state = { selectedPhoto: { id: 1 } };
+        const rootState = { user: { userId: 1 } };
+
+        return testAction(postPhotoUpdate, testPayload, { state, rootState }, [
           { type: 'setPhotoRequestingStart' },
           { type: 'setPhotoRequestingComplete' },
           { type: 'setPhotoError', payload: { error: 'Mock error message' } },
@@ -71,17 +77,23 @@ describe('photos', () => {
       const { updateSelectedPhoto } = actions;
 
       it('should be able to update photo contents dynamically with correct caps', () => {
-        const testPayload = {
-          contentType: 'testType',
-          content: 'test content',
-        };
-        const expectedPayload = {
-          testType: 'test content',
-        };
+        const testPayload = { testType: 'test content' };
+        const expectedPayload = { testType: 'test content' };
         const expectedType = 'setPhotoTestType';
         return testAction(updateSelectedPhoto, testPayload, {}, [
           { type: expectedType, payload: expectedPayload },
         ], true);
+      });
+
+      it('should dispatch once if content type is rating', () => {
+        const testPayload = { rating: 1 };
+        const expectedDispatch = { type: 'updateRating', payload: testPayload };
+
+        const dispatch = (type, payload) => {
+          expect({ type, payload }).toEqual(expectedDispatch);
+        };
+
+        return testAction(updateSelectedPhoto, testPayload, { dispatch }, [], true);
       });
     });
   });

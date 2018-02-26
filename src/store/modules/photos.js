@@ -20,9 +20,14 @@ const actions = {
         commit('setPhotoError', { error: error.message });
       });
   },
-  postPhotoUpdate({ commit, dispatch }, payload) {
+  postPhotoUpdate({ commit, dispatch, state, rootState }, payload) {
+    const requestPayload = {
+      userId: rootState.user.userId,
+      photoId: state.selectedPhoto.id,
+      ...payload,
+    };
     commit('setPhotoRequestingStart');
-    return photobookApi.postPhotoUpdate(payload)
+    return photobookApi.postPhotoUpdate(requestPayload)
       .then(() => {
         commit('setPhotoRequestingComplete');
         dispatch('updateSelectedPhoto', payload);
@@ -32,11 +37,16 @@ const actions = {
         commit('setPhotoError', { error: error.message });
       });
   },
-  updateSelectedPhoto({ commit }, { contentType, content }) {
+  updateSelectedPhoto({ commit, dispatch }, payload) {
     return new Promise((resolve) => {
-      const type = contentType[0].toUpperCase() + contentType.slice(1);
-      const mutation = `setPhoto${type}`;
-      commit(mutation, { [contentType]: content });
+      const key = Object.keys(payload)[0];
+      if (key === 'rating') {
+        dispatch('updateRating', payload);
+      } else {
+        const type = key[0].toUpperCase() + key.slice(1);
+        const mutation = `setPhoto${type}`;
+        commit(mutation, payload);
+      }
       resolve();
     });
   },

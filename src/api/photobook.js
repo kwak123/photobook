@@ -24,8 +24,8 @@ export default {
    * @param {Object} payload Object with desired updates to the server
    */
   postPhotoUpdate(payload) {
-    const { id, title, rating, description } = payload;
-    return axios.post('/api/photos/update', { id, title, rating, description })
+    const { userId, photoId, title, rating, description } = payload;
+    return axios.post('/api/photos/update', { userId, photoId, title, rating, description })
       .then(() => true);
   },
 };

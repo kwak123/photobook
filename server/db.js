@@ -4,10 +4,11 @@ const sampleUser = require('../sample-user.json');
 const fetchPhotoList = userId => sampleData.find(users => users.userId === Number(userId)).photos;
 
 const updatePhoto = (params) => {
-  const photoToUpdate = sampleData.find(photo => photo.id === Number(params.id));
+  const photos = fetchPhotoList(params.userId);
+  const photoToUpdate = photos.find(photo => photo.id === params.photoId);
   const keys = Object.keys(params);
   keys.forEach((key) => {
-    if (key !== 'id') {
+    if (!key.includes('Id')) {
       photoToUpdate[key] = params[key];
     }
   });

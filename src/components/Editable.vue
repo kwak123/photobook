@@ -1,7 +1,3 @@
-<!--
-Based on https://codelike.pro/create-a-contenteditable-with-vue/
--->
-
 <template>
   <div
     class="editable__input"
