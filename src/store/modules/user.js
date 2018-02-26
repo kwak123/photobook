@@ -27,8 +27,8 @@ const actions = {
 };
 
 const mutations = {
-  setUser(localState, { id, avatar, username, first, last }) {
-    Object.assign(localState, { userId: id, avatar, username, first, last });
+  setUser(localState, { userId, avatar, username, first, last }) {
+    Object.assign(localState, { userId, avatar, username, first, last });
   },
   setUserRating(localState, { rating }) {
     localState.rating = rating;

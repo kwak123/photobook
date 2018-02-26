@@ -2,8 +2,7 @@ const actions = {
   start: ({ dispatch, commit, rootState, rootGetters }) => dispatch('fetchUser')
     .then(() => {
       const userId = rootState.user.userId;
-      console.log(rootState);
-      dispatch('fetchPhotoList', { userId });
+      return dispatch('fetchPhotoList', { userId });
     })
     .then(() => {
       const rating = rootGetters.getPhotosAverage;

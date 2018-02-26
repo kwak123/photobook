@@ -10,15 +10,23 @@ describe('rootModule', () => {
       const { start } = actions;
 
       it('should dispatch fetchUser, fetchPhotoList, then commit setUserRating', () => {
-        const expectedDispatch = ['fetchUser', 'fetchPhotoList'];
+        const expectedDispatch = [
+          { type: 'fetchUser' },
+          { type: 'fetchPhotoList', payload: { userId: 1 } },
+        ];
         let count = 0;
-        const dispatch = action => new Promise((resolve) => {
-          expect(action).toEqual(expectedDispatch[count]);
+        const dispatch = (actionType, actionPayload) => new Promise((resolve) => {
+          const dispatched = expectedDispatch[count];
+          expect(actionType).toEqual(dispatched.type);
+          if (actionPayload) {
+            expect(actionPayload).toEqual(dispatched.payload);
+          }
           count += 1;
           resolve();
         });
         const context = {
           dispatch,
+          rootState: { user: { userId: 1 } },
           rootGetters: {
             getPhotosAverage: 1,
           },
