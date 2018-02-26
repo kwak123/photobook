@@ -67,14 +67,14 @@ describe('userModule', () => {
       });
     });
 
-    describe('setRating', () => {
-      const { setRating } = mutations;
+    describe('setUserRating', () => {
+      const { setUserRating } = mutations;
 
       it('should be able to set rating on state', () => {
         const state = { rating: '' };
         const test = { rating: '5.0' };
         const expected = { rating: '5.0' };
-        setRating(state, test);
+        setUserRating(state, test);
         expect(state).toEqual(expected);
       });
     });

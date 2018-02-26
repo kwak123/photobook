@@ -29,7 +29,7 @@ const mutations = {
   setUser(localState, { avatar, username, first, last }) {
     Object.assign(localState, { avatar, username, first, last });
   },
-  setRating(localState, { rating }) {
+  setUserRating(localState, { rating }) {
     localState.rating = rating;
   },
   setUserRequestingStart(localState) {

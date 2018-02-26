@@ -66,11 +66,11 @@ const restoreApi = () => {
  * resolves/rejects from action
  * @param {function} action promise action for testing
  * @param {*} actionPayload associated payload for action
- * @param {object} state state for action, will use {} as default
+ * @param {object} context context to give action, other than commit
  * @param {array} expectedMutations list of desired mutations
  * @param {boolean} resolves whether the promise should resolve or reject
  */
-export default (action, actionPayload, state = {}, expectedMutations, resolves = true) => {
+export default (action, actionPayload, context = {}, expectedMutations, resolves = true) => {
   let count = 0;
 
   const commit = (type, payload) => {
@@ -86,6 +86,6 @@ export default (action, actionPayload, state = {}, expectedMutations, resolves =
   };
 
   mockOutApi(resolves);
-  return action({ commit, state }, actionPayload)
+  return action({ commit, ...context }, actionPayload)
     .then(() => restoreApi());
 };

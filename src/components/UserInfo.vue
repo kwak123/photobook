@@ -55,6 +55,10 @@ export default {
   border-bottom: 1px lightgrey solid;
 }
 
+.userinfo__flex > * {
+  margin-bottom: 6px;
+}
+
 .userinfo__avatar--container {
   height: 128px;
   width: 128px;
@@ -73,11 +77,6 @@ export default {
   margin: 16px 0 8px 0;
 }
 
-.userinfo__username--text:empty::before {
-  content: 'Username';
-  color: lightgrey;
-}
-
 .userinfo__rating--text {
   /* width of star + space */
   margin-left: -22px;
@@ -85,5 +84,23 @@ export default {
 
 .userinfo__rating--text:before {
   content: '★ ';
+}
+
+/* Empty placeholders */
+.userinfo__username--text:empty::before {
+  content: 'Username';
+  color: lightgrey;
+}
+
+.userinfo__first--text:empty::before {
+  content: 'Someone\'s first name';
+  color: lightgrey;
+  font-style: italic;
+}
+
+.userinfo__last--text:empty::before {
+  content: 'Someone\'s last name';
+  color: lightgrey;
+  font-style: italic;
 }
 </style>

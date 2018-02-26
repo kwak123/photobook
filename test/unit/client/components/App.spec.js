@@ -12,8 +12,7 @@ describe('App', () => {
 
   beforeEach(() => {
     actions = {
-      fetchUser: jest.fn(),
-      fetchPhotoList: jest.fn(),
+      start: jest.fn(),
     };
     store = new Vuex.Store({
       actions,
@@ -24,9 +23,8 @@ describe('App', () => {
     expect(typeof App.mounted).toBe('function');
   });
 
-  it('should dispatch fetchUser and fetchPhotoList on mounted', () => {
-    shallow(App, { store });
-    expect(actions.fetchUser).toHaveBeenCalled();
-    expect(actions.fetchPhotoList).toHaveBeenCalled();
+  it('should call start on mounted', () => {
+    shallow(App, { localVue, store });
+    expect(actions.start).toHaveBeenCalled();
   });
 });

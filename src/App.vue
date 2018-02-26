@@ -27,10 +27,9 @@ export default {
     Profile,
   },
   mounted() {
-    this.fetchUser();
-    this.fetchPhotoList();
+    this.start();
   },
-  methods: mapActions(['fetchUser', 'fetchPhotoList']),
+  methods: mapActions(['fetchUser', 'fetchPhotoList', 'start']),
 };
 </script>
 
