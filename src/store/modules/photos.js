@@ -8,9 +8,9 @@ const state = {
 };
 
 const actions = {
-  fetchPhotoList({ commit }) {
+  fetchPhotoList({ commit }, { userId }) {
     commit('setPhotoRequestingStart');
-    return photobookApi.fetchPhotoList()
+    return photobookApi.fetchPhotoList(userId)
       .then((photoList) => {
         commit('setPhotoRequestingComplete');
         commit('setPhotoList', { photoList });

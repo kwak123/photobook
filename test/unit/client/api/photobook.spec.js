@@ -20,9 +20,16 @@ describe('photobookApi', () => {
   describe('fetchPhotoList', () => {
     const { fetchPhotoList } = photobook;
 
-    it('should be able to return a list of photos', () => {
-      moxios.stubRequest('/api/photos', { status: 200, response: [/* Mock photos */] });
-      return fetchPhotoList().then((photos) => {
+    it('should be able to return a list of photos based on user id', () => {
+      const userId = 1;
+      moxios.wait(() => {
+        const request = moxios.requests.mostRecent();
+        expect(request.config.method).toEqual('get');
+        expect(request.config.url).toEqual('/api/photos');
+        expect(request.config.params).toEqual({ userId });
+        request.respondWith({ status: 200, response: [/* Mock photo data */] });
+      });
+      return fetchPhotoList(userId).then((photos) => {
         expect(photos).toEqual([]);
       });
     });

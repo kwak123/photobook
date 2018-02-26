@@ -1,7 +1,7 @@
-const samplePhotos = require('../sample.json');
+const sampleData = require('../sample.json');
 const sampleUser = require('../sample-user.json');
 
-const fetchPhotoList = () => samplePhotos;
+const fetchPhotoList = userId => sampleData.find(users => users.userId === Number(userId)).photos;
 
 const fetchUser = () => sampleUser;
 

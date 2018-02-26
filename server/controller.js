@@ -2,7 +2,8 @@ const db = require('./db');
 
 const photos = {
   fetchPhotos: (req, res) => {
-    const photoList = db.fetchPhotoList();
+    const { userId } = req.query;
+    const photoList = db.fetchPhotoList(userId);
     res.send(photoList);
   },
 };

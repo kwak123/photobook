@@ -18,14 +18,15 @@ describe('photos', () => {
 
     describe('fetchPhotoList', () => {
       const { fetchPhotoList } = actions;
+      const user = { userId: 1 };
 
-      it('should be able to fetch photos', () => testAction(fetchPhotoList, null, {}, [
+      it('should be able to fetch photos', () => testAction(fetchPhotoList, user, {}, [
         { type: 'setPhotoRequestingStart' },
         { type: 'setPhotoRequestingComplete' },
         { type: 'setPhotoList', payload: { photoList: [] } },
       ], true));
 
-      it('should be able to handle failed photos', () => testAction(fetchPhotoList, null, {}, [
+      it('should be able to handle failed photos', () => testAction(fetchPhotoList, user, {}, [
         { type: 'setPhotoRequestingStart' },
         { type: 'setPhotoRequestingComplete' },
         { type: 'setPhotoError', payload: { error: 'Mock error message' } },

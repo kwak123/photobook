@@ -14,8 +14,8 @@ export default {
   /**
    * Fetches the current list of photos from the phtoso
   */
-  fetchPhotoList() {
-    return axios.get('/api/photos')
+  fetchPhotoList(userId) {
+    return axios.get('/api/photos', { params: { userId } })
       .then(({ data }) => data);
   },
 
