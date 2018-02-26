@@ -27,11 +27,21 @@ describe('Photobook', () => {
   });
 
   it('should be able to change rating', () => {
-    cy.get('.rating__container--star').each(($el, idx) => {
+    cy.get('.rating__container--star').each(($el, $idx) => {
       cy.wrap($el).click();
       cy.get('.rating__container--star.checked').should(($p) => {
-        expect($p).to.have.length(5 - idx);
+        expect($p).to.have.length(5 - $idx);
       });
+    });
+  });
+
+  it('should be able to change selected photo', () => {
+    cy.get('.photolist__inner--grid-item').each(($el, $idx) => {
+      const src = $el.find('img').attr('src');
+      const wrapped = cy.wrap($el).click();
+      cy.get('.photodetail__inner--photo').then(($img) => {
+        expect($img.attr('src')).to.equal(src);
+      })
     });
   });
 });
