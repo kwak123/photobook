@@ -6,6 +6,11 @@ const photos = {
     const photoList = db.fetchPhotoList(userId);
     res.send(photoList);
   },
+
+  updatePhoto: (req, res) => {
+    db.updatePhoto(req.body);
+    res.sendStatus(200);
+  },
 };
 
 const user = {

@@ -20,17 +20,25 @@ const actions = {
         commit('setPhotoError', { error: error.message });
       });
   },
-  postPhotoUpdate({ commit }, payload) {
+  postPhotoUpdate({ commit, dispatch }, payload) {
     commit('setPhotoRequestingStart');
     return photobookApi.postPhotoUpdate(payload)
       .then(() => {
         commit('setPhotoRequestingComplete');
-        commit('updateSelectedPhoto', payload);
+        dispatch('updateSelectedPhoto', payload);
       })
       .catch((error) => {
         commit('setPhotoRequestingComplete');
         commit('setPhotoError', { error: error.message });
       });
+  },
+  updateSelectedPhoto({ commit }, { contentType, content }) {
+    return new Promise((resolve) => {
+      const type = contentType[0].toUpperCase() + contentType.slice(1);
+      const mutation = `setPhoto${type}`;
+      commit(mutation, { [contentType]: content });
+      resolve();
+    });
   },
 };
 
@@ -69,10 +77,6 @@ const mutations = {
   },
   setPhotoError(localState, { error }) {
     localState.error = error;
-  },
-  updateSelectedPhoto(localState, properties) {
-    // This will need some sanity checking in the future
-    Object.assign(localState.selectedPhoto, properties);
   },
 };
 

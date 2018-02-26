@@ -46,7 +46,7 @@ export default {
       'setPhotoRating',
       'setPhotoDescription',
     ]),
-    ...mapActions(['updateRating']),
+    ...mapActions(['updateRating', 'postPhotoUpdate']),
   },
   computed: mapState({
     url: state => state.photos.selectedPhoto.url,

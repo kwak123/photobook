@@ -14,6 +14,7 @@ describe('rootModule', () => {
           { type: 'fetchUser' },
           { type: 'fetchPhotoList', payload: { userId: 1 } },
         ];
+
         let count = 0;
         const dispatch = (actionType, actionPayload) => new Promise((resolve) => {
           const dispatched = expectedDispatch[count];
@@ -24,13 +25,13 @@ describe('rootModule', () => {
           count += 1;
           resolve();
         });
+
         const context = {
           dispatch,
           rootState: { user: { userId: 1 } },
-          rootGetters: {
-            getPhotosAverage: 1,
-          },
+          rootGetters: { getPhotosAverage: 1 },
         };
+
         return testAction(start, null, context, [
           { type: 'setUserRating', payload: { rating: 1 } },
         ], true);
@@ -47,6 +48,7 @@ describe('rootModule', () => {
             getPhotosAverage: 1,
           },
         };
+
         return testAction(updateRating, payload, context, [
           { type: 'setPhotoRating', payload: { rating: 1 } },
           { type: 'setUserRating', payload: { rating: 1 } },

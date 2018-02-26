@@ -38,10 +38,22 @@ describe('photos', () => {
 
       it('should be to request photo update', () => {
         const testPayload = { id: '1', title: 'test' };
-        return testAction(postPhotoUpdate, testPayload, {}, [
+        const expectedDispatches = [
+          { type: 'updateSelectedPhoto', payload: testPayload },
+        ];
+
+        let count = 0;
+        const dispatch = (type, payload) => {
+          expect(type).toEqual(expectedDispatches[count].type);
+          if (payload) {
+            expect(payload).toEqual(expectedDispatches[count].payload);
+          }
+          count += 1;
+        };
+
+        return testAction(postPhotoUpdate, testPayload, { dispatch }, [
           { type: 'setPhotoRequestingStart' },
           { type: 'setPhotoRequestingComplete' },
-          { type: 'updateSelectedPhoto', payload: testPayload },
         ], true);
       });
 
@@ -52,6 +64,24 @@ describe('photos', () => {
           { type: 'setPhotoRequestingComplete' },
           { type: 'setPhotoError', payload: { error: 'Mock error message' } },
         ], false);
+      });
+    });
+
+    describe('updateSelectedPhoto', () => {
+      const { updateSelectedPhoto } = actions;
+
+      it('should be able to update photo contents dynamically with correct caps', () => {
+        const testPayload = {
+          contentType: 'testType',
+          content: 'test content',
+        };
+        const expectedPayload = {
+          testType: 'test content',
+        };
+        const expectedType = 'setPhotoTestType';
+        return testAction(updateSelectedPhoto, testPayload, {}, [
+          { type: expectedType, payload: expectedPayload },
+        ], true);
       });
     });
   });
@@ -216,18 +246,6 @@ describe('photos', () => {
         const state = { error: '' };
         setPhotoError(state, { error: 'Mock error' });
         expect(state.error).toEqual('Mock error');
-      });
-    });
-
-    describe('updateSelectedPhoto', () => {
-      const { updateSelectedPhoto } = mutations;
-      it('should be able to update selectedPhoto', () => {
-        const expected = { id: 1, title: 'new' };
-        const state = {
-          selectedPhoto: { id: 1, title: 'test' },
-        };
-        updateSelectedPhoto(state, { title: 'new' });
-        expect(state.selectedPhoto).toEqual(expected);
       });
     });
   });
