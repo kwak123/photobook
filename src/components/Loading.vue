@@ -1,10 +1,17 @@
 <template>
-  <div class="loading"></div>
+  <div v-if="requesting" class="loading"></div>
+  <div v-else>{{ text }}</div>
 </template>
 
 <script>
 export default {
   name: 'Loading',
+  props: ['requesting', 'error', 'message'],
+  computed: {
+    text() {
+      return this.error ? this.error : this.message;
+    }
+  },
 };
 </script>
 

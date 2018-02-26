@@ -19,7 +19,11 @@ describe('PhotoDetail', () => {
       description: 'testDescription',
     };
     state = {
-      photos: { selectedPhoto },
+      photos: {
+        selectedPhoto,
+        requesting: false,
+        error: '',
+      },
     };
     store = new Vuex.Store({
       state,

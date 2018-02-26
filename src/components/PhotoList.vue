@@ -15,7 +15,7 @@
           alt="photo.url"/>
       </div>
     </div>
-    <Loading v-else />
+    <Loading v-else v-bind="{ requesting, error, message }" />
   </div>
 </template>
 
@@ -27,9 +27,16 @@ import Loading from './Loading';
 export default {
   name: 'PhotoList',
   components: { Loading },
+  data() {
+    return {
+      message: 'User has no photos',
+    };
+  },
   methods: mapMutations(['setSelectedPhoto']),
   computed: mapState({
     photoList: state => state.photos.photoList,
+    requesting: state => state.photos.requesting,
+    error: state => state.photos.requesting,
   }),
 };
 </script>

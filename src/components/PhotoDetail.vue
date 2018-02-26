@@ -23,7 +23,7 @@
     <div
       v-else
       class="photodetail__empty">
-      <p>Select a photo</p>
+      <Loading v-bind="{ requesting, error, message }"/>
     </div>
   </div>
 </template>
@@ -33,26 +33,28 @@ import { mapState, mapMutations, mapActions } from 'vuex';
 
 import Editable from './Editable';
 import Rating from './Rating';
+import Loading from './Loading';
 
 export default {
   name: 'PhotoDetail',
   components: {
     Editable,
     Rating,
+    Loading,
   },
-  methods: {
-    ...mapMutations([
-      'setPhotoTitle',
-      'setPhotoRating',
-      'setPhotoDescription',
-    ]),
-    ...mapActions(['updateRating', 'postPhotoUpdate']),
+  data() {
+    return {
+      message: 'Select a photo',
+    };
   },
+  methods: mapActions(['updateRating', 'postPhotoUpdate']),
   computed: mapState({
     url: state => state.photos.selectedPhoto.url,
     title: state => state.photos.selectedPhoto.title,
     rating: state => state.photos.selectedPhoto.rating,
     description: state => state.photos.selectedPhoto.description,
+    requesting: state => state.photos.requesting,
+    error: state => state.photos.error,
   }),
 };
 </script>
